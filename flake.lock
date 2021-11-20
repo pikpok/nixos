@@ -1,0 +1,81 @@
+{
+  "nodes": {
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1637362702,
+        "narHash": "sha256-WFGEXrh2wWHi5DLdUX1qM5T3P5TgmVE6AyM+bVuOaNs=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "8230decb3f0cb3408607accc93e5d0951ebf3963",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1637155076,
+        "narHash": "sha256-26ZPNiuzlsnXpt55Q44+yzXvp385aNAfevzVEKbrU5Q=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "715f63411952c86c8f57ab9e3e3cb866a015b5f2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nur": {
+      "locked": {
+        "lastModified": 1637363075,
+        "narHash": "sha256-cNp/fmFNlGR80OnodNmRU+6kbqK6Z7OwBUU4POJmY2k=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "ae09daea3e9f9c9fdb14d13563d18b080a6cef6f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
+    "pinebook-pro": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1635815864,
+        "narHash": "sha256-oIhShK2j198APnhm45iqhF8TDQ3M50LY3Hxn4hUDPF4=",
+        "owner": "samueldr",
+        "repo": "wip-pinebook-pro",
+        "rev": "caa3d3e324c369454da05ef6558c44ee1a0ee234",
+        "type": "github"
+      },
+      "original": {
+        "owner": "samueldr",
+        "repo": "wip-pinebook-pro",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "home-manager": "home-manager",
+        "nixpkgs": "nixpkgs",
+        "nur": "nur",
+        "pinebook-pro": "pinebook-pro"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
