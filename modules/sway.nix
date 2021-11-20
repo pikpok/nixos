@@ -1,4 +1,6 @@
 { pkgs, home-manager, ... }: {
+  imports = [ ./waybar ];
+
   environment.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "1";
     # PBP only, for Alacritty to work
