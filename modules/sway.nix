@@ -1,4 +1,24 @@
-{ pkgs, home-manager, ... }: {
+{ pkgs, home-manager, ... }:
+let
+  gsettings = "${pkgs.glib}/bin/gsettings";
+  gsettingsScript = pkgs.writeShellScript "gsettings-auto.sh" ''
+    expression=""
+    for pair in "$@"; do
+      IFS=:; set -- $pair
+      expressions="$expressions -e 's:^$2=(.*)$:${gsettings} set org.gnome.desktop.interface $1 \1:e'"
+    done
+    IFS=
+    echo "" >/tmp/gsettings.log
+    echo exec sed -E $expressions "''${XDG_CONFIG_HOME:-$HOME/.config}"/gtk-3.0/settings.ini &>>/tmp/gsettings.log
+    eval exec sed -E $expressions "''${XDG_CONFIG_HOME:-$HOME/.config}"/gtk-3.0/settings.ini &>>/tmp/gsettings.log
+  '';
+  gsettingsCommand = ''
+    ${gsettingsScript} \
+      gtk-theme:gtk-theme-name \
+      icon-theme:gtk-icon-theme-name \
+      cursor-theme:gtk-cursor-theme-name
+  '';
+in {
   imports = [ ./waybar ];
 
   environment.sessionVariables = {
@@ -13,6 +33,7 @@
     keepassxc
     waybar
     wofi
+    xdg-utils
     pavucontrol
     pamixer
     polkit_gnome
@@ -25,6 +46,27 @@
   fonts.fonts = with pkgs; [ font-awesome hack-font ];
 
   home-manager.users.pikpok = {
+    gtk = {
+      enable = true;
+      iconTheme = {
+        name = "Adwaita";
+        package = pkgs.gnome.adwaita-icon-theme;
+      };
+      theme = {
+        name = "Adwaita";
+        package = pkgs.gnome.gnome_themes_standard;
+      };
+    };
+
+    qt = {
+      enable = true;
+      platformTheme = "gnome";
+      style = {
+        package = pkgs.adwaita-qt;
+        name = "adwaita";
+      };
+    };
+
     programs.mako = {
       enable = true;
       backgroundColor = "#273238";
@@ -47,6 +89,10 @@
       '';
       config = rec {
         startup = [
+          {
+            always = true;
+            command = "${gsettingsCommand}";
+          }
           {
             command =
               "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
