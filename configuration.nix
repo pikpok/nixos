@@ -11,6 +11,7 @@ in {
     "${inputs.pinebook-pro}/pinebook_pro.nix"
     ./modules/sway.nix
     ./modules/firefox.nix
+    ./modules/vscode.nix
   ];
 
   boot = {
@@ -118,7 +119,6 @@ in {
   environment.systemPackages = with pkgs; [
     vim
     wget
-    vscode
     git
     bat
   ];
