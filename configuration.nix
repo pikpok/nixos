@@ -12,6 +12,7 @@ in {
     ./modules/sway.nix
     ./modules/firefox.nix
     ./modules/vscode.nix
+    ./modules/borg.nix
   ];
 
   boot = {

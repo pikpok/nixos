@@ -50,11 +50,11 @@ in {
       enable = true;
       iconTheme = {
         name = "Adwaita";
-        package = pkgs.gnome.adwaita-icon-theme;
+        package = pkgs.gnome3.adwaita-icon-theme;
       };
       theme = {
         name = "Adwaita";
-        package = pkgs.gnome.gnome_themes_standard;
+        package = pkgs.gnome-themes-extra;
       };
     };
 
