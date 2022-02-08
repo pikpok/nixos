@@ -18,7 +18,8 @@ let
       icon-theme:gtk-icon-theme-name \
       cursor-theme:gtk-cursor-theme-name
   '';
-in {
+in
+{
   imports = [ ./waybar ];
 
   environment.sessionVariables = {
@@ -42,6 +43,8 @@ in {
   ];
 
   programs.sway.enable = true;
+
+  services.getty.autologinUser = "pikpok";
 
   fonts.fonts = with pkgs; [ font-awesome hack-font ];
 
@@ -119,6 +122,7 @@ in {
         keybindings = {
           "${modifier}+Return" = "exec ${terminal}";
           "${modifier}+d" = "exec wofi --show run";
+          "${modifier}+n" = "exec ${pkgs.networkmanager_dmenu}/bin/networkmanager_dmenu";
           "${modifier}+Shift+b" = "exec /home/pikpok/.local/bin/btmenu";
           "${modifier}+Shift+c" = "reload";
           "${modifier}+Shift+e" = "exit";

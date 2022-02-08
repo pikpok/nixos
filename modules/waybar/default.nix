@@ -84,7 +84,7 @@
             "format-disconnected" = "";
             "format-alt" = "{ifname}: {ipaddr}/{cidr}";
             "tooltip-format-wifi" = "{essid} ({signalStrength}%)";
-            "on-click" = "networkmanager_dmenu";
+            "on-click" = "${pkgs.networkmanager_dmenu}/bin/networkmanager_dmenu";
             "on-click-middle" = "nm-connection-editor";
           };
           "network#ethernet" = {
@@ -92,7 +92,7 @@
             "format-ethernet" = "";
             "format-alt" = "{ifname}: {ipaddr}/{cidr}";
             "tooltip-format" = "{ifname}: {ipaddr}/{cidr}";
-            "on-click" = "networkmanager_dmenu";
+            "on-click" = "${pkgs.networkmanager_dmenu}/bin/networkmanager_dmenu";
             "on-click-middle" = "nm-connection-editor";
           };
           "network#vpn" = {
@@ -100,7 +100,7 @@
             "format-ethernet" = "";
             "format-alt" = "{ifname}: {ipaddr}/{cidr}";
             "tooltip-format-ethernet" = "VPN {ifname}: {ipaddr}/{cidr}";
-            "on-click" = "networkmanager_dmenu";
+            "on-click" = "${pkgs.networkmanager_dmenu}/bin/networkmanager_dmenu";
             "on-click-middle" = "nm-connection-editor";
           };
           "pulseaudio" = {

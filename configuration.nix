@@ -37,21 +37,6 @@ in {
     initrd.kernelModules = [ "nvme" ];
   };
 
-  hardware.deviceTree.overlays = [{
-    name = "disable-dp";
-    dtsText = ''
-       /dts-v1/;
-       /plugin/;
-       / {
-           compatible = "pine64,pinebook-pro";
-       };
-
-      &cdn_dp {
-        status = "disabled";
-      };
-    '';
-  }];
-
   systemd.services.pinebook-fix-sound = {
     serviceConfig = {
       Type = "oneshot";
@@ -63,12 +48,14 @@ in {
   users.users.pikpok = {
     isNormalUser = true;
     home = "/home/pikpok";
-    extraGroups = [ "wheel" "networkmanager" "audio" "video" ];
+    extraGroups = [ "wheel" "networkmanager" "audio" "video" "docker" ];
   };
-  nix.trustedUsers = [ "pikpok" ];
-  nix.allowedUsers = [ "pikpok" ];
   nix = {
     package = pkgs.nixFlakes;
+    settings = {
+      trusted-users = ["pikpok"];
+      allowed-users = ["pikpok"];
+    };
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -113,9 +100,14 @@ in {
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
+  services.upower.enable = true;
+
   hardware.bluetooth.enable = true;
   services.pipewire.enable = true;
   services.pipewire.pulse.enable = true;
+
+  # Docker
+  virtualisation.docker.enable = true;
 
   environment.systemPackages = with pkgs; [
     vim
