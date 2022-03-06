@@ -31,10 +31,6 @@ in {
       "console=ttyS2,1500000n8"
       "console=tty0"
     ];
-
-    initrd.availableKernelModules =
-      [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
-    initrd.kernelModules = [ "nvme" ];
   };
 
   systemd.services.pinebook-fix-sound = {
