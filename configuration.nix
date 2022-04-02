@@ -5,14 +5,20 @@ let
     export PATH="${lib.makeBinPath [ pkgs.nix ]}:$PATH}"
     ${inputs.pinebook-pro}/sound/reset-sound.rb
   '');
-in {
+in
+{
   imports = [
     ./hardware-configuration.nix
     "${inputs.pinebook-pro}/pinebook_pro.nix"
-    ./modules/sway.nix
-    ./modules/firefox.nix
-    ./modules/vscode.nix
+    ./modules/audio.nix
+    ./modules/avahi.nix
+    ./modules/base.nix
     ./modules/borg.nix
+    ./modules/docker.nix
+    ./modules/firefox.nix
+    ./modules/sway.nix
+    ./modules/user.nix
+    ./modules/vscode.nix
   ];
 
   boot = {
@@ -41,22 +47,6 @@ in {
     wantedBy = [ "multi-user.target" ];
   };
 
-  users.users.pikpok = {
-    isNormalUser = true;
-    home = "/home/pikpok";
-    extraGroups = [ "wheel" "networkmanager" "audio" "video" "docker" ];
-  };
-  nix = {
-    package = pkgs.nixFlakes;
-    settings = {
-      trusted-users = ["pikpok"];
-      allowed-users = ["pikpok"];
-    };
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
-
   console.earlySetup = true; # luks
   services.logind.extraConfig = ''
     HandlePowerKey=ignore
@@ -65,54 +55,8 @@ in {
   networking.hostName = "pikpok-pbp";
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
-  time.timeZone = "Europe/Warsaw";
-  nixpkgs.config.allowUnfree = true;
-  services.timesyncd.enable = true;
-
   networking.useDHCP = false;
   networking.interfaces.wlan0.useDHCP = true;
-
-  services.avahi = {
-    enable = true;
-    nssmdns = true;
-    publish = {
-      enable = true;
-      addresses = true;
-      workstation = true;
-    };
-  };
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "pl_PL.UTF-8";
-  console = { keyMap = "pl"; };
-
-  # systemd.user.services.snapclient-local = {
-  #   wantedBy = [ "pipewire.service" ];
-  #   after = [ "pipewire.service" ];
-  #   serviceConfig = { ExecStart = "${pkgs.snapcast}/bin/snapclient"; };
-  # };
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  services.upower.enable = true;
-
-  hardware.bluetooth.enable = true;
-  services.pipewire.enable = true;
-  services.pipewire.pulse.enable = true;
-
-  # Docker
-  virtualisation.docker.enable = true;
-
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
-    git
-    bat
-  ];
-
-  services.openssh.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
