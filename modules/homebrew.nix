@@ -4,23 +4,32 @@
   ...
 }:
 lib.mkIf pkgs.stdenv.isDarwin {
-  homebrew.enable = true;
-  homebrew.cleanup = "zap";
-  homebrew.autoUpdate = true;
-  homebrew.global.brewfile = true;
-  homebrew.global.noLock = true;
+  homebrew = {
+    enable = true;
+    cleanup = "zap";
+    autoUpdate = true;
+    global.brewfile = true;
+    global.noLock = true;
 
-  homebrew.taps = [
-    "homebrew/core"
-    "homebrew/cask"
-  ];
+    extraConfig = ''
+      cask "firefox", args: { language: "pl-PL" }
+    '';
 
-  homebrew.casks = [
-    "keepassxc"
-    "nextcloud"
-    "tunnelblick"
-    "spotify"
-    "steam"
-    "signal"
-  ];
+    taps = [
+      "homebrew/core"
+      "homebrew/cask"
+    ];
+
+    casks = [
+      "keepassxc"
+      "firefox"
+      "nextcloud"
+      "tunnelblick"
+      "spotify"
+      "steam"
+      "signal"
+    ];
+  };
+
+  home-manager.users.pikpok.programs.firefox.package = pkgs.runCommand "firefox-0.0.0" {} "mkdir $out";
 }
