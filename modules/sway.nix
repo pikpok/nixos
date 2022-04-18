@@ -46,7 +46,7 @@ in
 
   services.getty.autologinUser = "pikpok";
 
-  fonts.fonts = with pkgs; [ font-awesome hack-font ];
+  fonts.fonts = with pkgs; [ font-awesome ];
 
   home-manager.users.pikpok = {
     gtk = {

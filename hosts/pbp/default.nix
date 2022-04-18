@@ -10,15 +10,16 @@ in
   imports = [
     ./hardware-configuration.nix
     "${inputs.pinebook-pro}/pinebook_pro.nix"
-    ./modules/audio.nix
-    ./modules/avahi.nix
-    ./modules/base.nix
-    ./modules/borg.nix
-    ./modules/docker.nix
-    ./modules/firefox.nix
-    ./modules/sway.nix
-    ./modules/user.nix
-    ./modules/vscode.nix
+    ../../modules/base-linux.nix
+
+    ../../modules/audio.nix
+    ../../modules/avahi.nix
+    ../../modules/borg.nix
+    ../../modules/docker.nix
+    ../../modules/firefox.nix
+    ../../modules/sway.nix
+    ../../modules/user.nix
+    ../../modules/vscode.nix
   ];
 
   boot = {
