@@ -29,6 +29,11 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "steam"
       "signal"
     ];
+
+    masApps = {
+      Xcode = 497799835;
+      Wireguard = 1451685025;
+    };
   };
 
   home-manager.users.pikpok.programs.firefox.package = pkgs.runCommand "firefox-0.0.0" {} "mkdir $out";

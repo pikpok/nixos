@@ -20,6 +20,7 @@ in
     ../../modules/sway.nix
     ../../modules/user.nix
     ../../modules/vscode.nix
+    ../../modules/shell.nix
   ];
 
   boot = {

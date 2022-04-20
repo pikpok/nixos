@@ -11,11 +11,10 @@
     ../../modules/user.nix
     ../../modules/vscode.nix
     ../../modules/homebrew.nix
+    ../../modules/shell.nix
   ];
 
   networking.hostName = "pikpok-mbp";
-
-  programs.zsh.enable = true;
 
   environment.systemPackages = with pkgs; [
     obsidian
