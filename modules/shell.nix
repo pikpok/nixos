@@ -12,6 +12,10 @@
         plugins = ["git" "sudo"];
       };
 
+      localVariables = {
+        DEFAULT_USER = "$USER";
+      };
+
       initExtra = ''
         . ${pkgs.asdf-vm}/share/asdf-vm/asdf.sh
       '';

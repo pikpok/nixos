@@ -28,6 +28,8 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "spotify"
       "steam"
       "signal"
+      "ngrok"
+      "android-file-transfer"
     ];
 
     masApps = {

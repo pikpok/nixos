@@ -6,5 +6,5 @@
   imports = [./base.nix];
 
   nix.useDaemon = true;
-  fonts.enableFontDir = true;
+  fonts.fontDir.enable = true;
 }
