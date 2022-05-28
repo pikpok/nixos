@@ -30,6 +30,11 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "signal"
       "ngrok"
       "android-file-transfer"
+      "calibre"
+      "messenger"
+      "remarkable"
+      "zoom"
+      "android-studio"
     ];
 
     masApps = {
