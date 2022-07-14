@@ -8,6 +8,8 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  home-manager.users.pikpok.home.stateVersion = "18.09";
+
   nix = {
     package = pkgs.nixFlakes;
     trustedUsers = ["pikpok"];
