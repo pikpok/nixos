@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  inputs,
   ...
 }: {
   # Set your time zone.
@@ -17,6 +18,7 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+    nixPath = {nixpkgs = "${inputs.nixpkgs.outPath}";};
   };
 
   environment.systemPackages = with pkgs; [
