@@ -12,4 +12,6 @@
   services.timesyncd.enable = true;
   services.upower.enable = true;
   services.openssh.enable = true;
+
+  networking.firewall.allowedTCPPorts = [5900];
 }

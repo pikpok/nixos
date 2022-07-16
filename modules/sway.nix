@@ -32,14 +32,10 @@ in
     alacritty
     nextcloud-client
     keepassxc
-    waybar
-    wofi
     xdg-utils
     pavucontrol
-    pamixer
-    polkit_gnome
-    brightnessctl
-    wl-clipboard
+    wayvnc
+    spot
   ];
 
   programs.sway.enable = true;
@@ -94,10 +90,10 @@ in
       systemdIntegration = true;
       wrapperFeatures.gtk = true;
       extraConfig = ''
-        bindsym --release Print exec grim \"screenshot-$(date +%Y%m%d%H%M%S).png"
-        bindsym --release Ctrl+Print exec grim - | wl-copy
-        bindsym --release Shift+Print exec grim -g \"$(slurp)" \"screenshot-$(date +%Y%m%d%H%M%S).png"
-        bindsym --release Ctrl+Shift+Print exec grim -g \"$(slurp)" - | wl-copy
+        bindsym --release Print exec ${pkgs.grim}/bin/grim "screenshot-$(date +%Y%m%d%H%M%S).png"
+        bindsym --release Ctrl+Print exec ${pkgs.grim}/bin/grim - | ${pkgs.wl-clipboard}/bin/wl-copy
+        bindsym --release Shift+Print exec ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)" "screenshot-$(date +%Y%m%d%H%M%S).png"
+        bindsym --release Ctrl+Shift+Print exec ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.wl-clipboard}/bin/wl-copy
       '';
       config = rec {
         startup = [
@@ -122,34 +118,37 @@ in
           "*" = {
             tap = "enabled";
             xkb_layout = "pl";
+            natural_scroll = "enabled";
           };
         };
         gaps.inner = 10;
-        defaultWorkspace = "1";
+        defaultWorkspace = "workspace 1";
         bars = [{ command = "${pkgs.waybar}/bin/waybar"; }];
         output = { "*" = { bg = "${./wallpaper.jpg} fill"; }; };
         keybindings = {
           "${modifier}+Return" = "exec ${terminal}";
-          "${modifier}+d" = "exec wofi --show run";
+          "${modifier}+d" = "exec ${pkgs.wofi}/bin/wofi --show run";
           "${modifier}+n" = "exec ${pkgs.networkmanager_dmenu}/bin/networkmanager_dmenu";
-          "${modifier}+Shift+b" = "exec /home/pikpok/.local/bin/btmenu";
+          "${modifier}+Shift+b" = "exec ${../scripts/btmenu.sh}";
           "${modifier}+Shift+c" = "reload";
           "${modifier}+Shift+e" = "exit";
           "${modifier}+Shift+q" = "kill";
           "${modifier}+r" = ''mode "resize"'';
 
           "XF86Display" = "output eDP-1 toggle";
-          "XF86AudioRaiseVolume" = "exec pamixer -i 5";
-          "XF86AudioLowerVolume" = "exec pamixer -d 5";
-          "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
-          "XF86AudioMicMute" =
-            "exec pactl set-source-mute @DEFAULT_SOURCE@ toggle";
-          "XF86AudioPlay" = "exec playerctl play-pause";
-          "XF86AudioPause" = "exec playerctl pause";
-          "XF86AudioNext" = "exec playerctl next";
-          "XF86AudioPrev" = "exec playerctl previous";
-          "XF86MonBrightnessDown" = "exec brightnessctl set 5%-";
-          "XF86MonBrightnessUp" = "exec brightnessctl set +5%";
+          "XF86AudioRaiseVolume" = "exec ${pkgs.pamixer}/bin/pamixer -i 5";
+          "XF86AudioLowerVolume" = "exec ${pkgs.pamixer}/bin/pamixer -d 5";
+          "XF86AudioMute" = "exec ${pkgs.pamixer}/bin/pamixer -t";
+          "XF86AudioMicMute" = "exec ${pkgs.pamixer}/bin/pamixer --default-source -t";
+
+          "XF86AudioPlay" = "exec ${pkgs.playerctl}/bin/playerctl play-pause";
+          "XF86AudioPause" = "exec ${pkgs.playerctl}/bin/playerctl pause";
+          "XF86AudioNext" = "exec ${pkgs.playerctl}/bin/playerctl next";
+          "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl previous";
+
+          "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 5%-";
+          "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +5%";
+
           "${modifier}+Left" = "focus left";
           "${modifier}+Down" = "focus down";
           "${modifier}+Up" = "focus up";

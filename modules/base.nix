@@ -18,7 +18,7 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    nixPath = {nixpkgs = "${inputs.nixpkgs.outPath}";};
+    nixPath = ["nixpkgs=${inputs.nixpkgs.outPath}"];
   };
 
   environment.systemPackages = with pkgs; [

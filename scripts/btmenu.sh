@@ -1,0 +1,95 @@
+#!/usr/bin/env nix-shell
+#!nix-shell -i bash -p notify-desktop wofi
+
+_bluetoothctl() {
+    LC_ALL=C timeout 30 bluetoothctl
+}
+
+mode=connect
+
+# Name -> MAC
+declare -A DEVICES
+while read -r _ mac name; do
+    DEVICES["$name"]=$mac
+done < <(echo "devices" | _bluetoothctl | awk '$1 == "Device"')
+
+notify() {
+    local msg
+    local is_error
+
+    msg=${1?BUG: no message}
+    is_error=${2:-0}
+
+    if command -v notify-desktop >/dev/null 2>&1; then
+        notify-desktop -i bluetooth -t 2000 "btmenu" "$msg"  # TODO: escaping
+    fi
+
+    if (( is_error )); then
+        printf 'ERROR: %s\n' "$msg" >&2
+    else
+        printf '%s\n' "$msg"
+    fi
+}
+
+execute_mode() {
+    local name
+    local mac
+    local preposition
+    local expected_to_connect
+    local retries
+
+    mode=connect
+    retries=15
+    preposition=to
+    expected_to_connect=yes
+
+    if ! (( ${#DEVICES[@]} )); then
+        notify "No devices found. Are they registered with D-Bus?" 1
+        return 2
+    fi
+
+    name=$(printf '%s\n' "${!DEVICES[@]}" | wofi -p "btmenu" --dmenu "${dmenu_args[@]}")
+    [[ $name ]] || return
+    mac=${DEVICES["$name"]}
+
+    if [[ `bluetoothctl info $mac | grep "Connected: yes" | wc -l` == 1 ]]; then
+        preposition=from
+        mode=disconnect
+        expected_to_connect=no
+    fi
+
+    notify "Attempting to $mode $preposition $name"
+
+    while (( retries-- )); do
+        printf 'power on\n%s %s\n' "$mode" "$mac" | _bluetoothctl
+        if printf 'info %s\n' "$mac" |
+            _bluetoothctl |
+            grep -Pq '^[\t ]+Connected: '"$expected_to_connect"; then
+            notify "${mode^}ed $preposition $name"
+            return 0
+        fi
+        sleep 1
+    done
+
+    ret="$?"
+    notify "Failed to $mode $preposition $name" 1
+    return "$ret"
+}
+
+i=2
+
+for arg do
+    echo $arg
+    if [[ $arg == :: ]]; then
+        dmenu_args=( "${@:$i}" )
+        break
+    fi
+
+    case "$arg" in
+        -d) mode=disconnect ;;
+    esac
+
+    (( i++ ))
+done
+
+execute_mode "$mode"

@@ -6,8 +6,8 @@ buildGoModule rec {
 
   src = fetchgit {
     url = "https://git.hrfee.pw/hrfee/waybar-mpris.git";
-    rev = "4b71fa248ad07e23a62d1d5811e163113e1baab1";
-    sha256 = "ACfK3Ce6C07e851++ZeWQFHJlpoXN8Nh58+1fiVbrwk=";
+    rev = "485ec0ec0af80a0d63c10e94aebfc59b16aab46b";
+    sha256 = "BjLxWnDNsR2ZnNklNiKzi1DeoPpaZsRdKbVSwNwYhJ4=";
   };
 
   vendorSha256 = "85jFSAOfNMihv710LtfETmkKRqcdRuFCHVuPkW94X/Y=";

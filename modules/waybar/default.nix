@@ -1,4 +1,14 @@
-{ pkgs, lib, home-manager, inputs, ... }: {
+{ pkgs, lib, home-manager, inputs, ... }:
+
+let
+  waybarDnd = pkgs.runCommandLocal "waybar-dnd"
+    { nativeBuildInputs = [ pkgs.makeWrapper ]; }
+    ''
+      makeWrapper ${../../scripts/waybar-dnd.sh} $out/bin/waybar-dnd \
+        --prefix PATH : ${lib.makeBinPath [ pkgs.waybar pkgs.mako ]}
+    '';
+in
+{
   nixpkgs.overlays = [ (import ./overlay.nix) ];
 
   home-manager.users.pikpok = {
@@ -118,7 +128,7 @@
               "car" = "";
               "default" = [ "" "" "" ];
             };
-            "on-click" = "pavucontrol";
+            "on-click" = "${pkgs.pavucontrol}/bin/pavucontrol";
           };
           "custom/media" = {
             "format" = " {}";
@@ -130,11 +140,11 @@
             "on-click" = "${pkgs.waybar-mpris}/bin/waybar-mpris --send toggle";
           };
           "custom/dnd" = {
-            "exec" = "$HOME/.local/bin/waybar-dnd";
+            "exec" = "${waybarDnd}/bin/waybar-dnd";
             "return-type" = "json";
             "signal" = 2;
             "interval" = "once";
-            "on-click" = "$HOME/.local/bin/waybar-dnd toggle";
+            "on-click" = "${waybarDnd}/bin/waybar-dnd toggle";
           };
         };
       }];
