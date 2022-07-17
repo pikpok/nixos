@@ -16,7 +16,7 @@ toggle() {
         makoctl set-mode dnd
         touch "$marker"
     fi
-    sleep 1 && pkill -RTMIN+2 -x waybar
+    pkill -SIGRTMIN+2 .waybar-wrapped
 }
 
 [ $# -gt 0 ] && toggle || show

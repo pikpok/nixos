@@ -5,12 +5,10 @@ let
     { nativeBuildInputs = [ pkgs.makeWrapper ]; }
     ''
       makeWrapper ${../../scripts/waybar-dnd.sh} $out/bin/waybar-dnd \
-        --prefix PATH : ${lib.makeBinPath [ pkgs.waybar pkgs.mako ]}
+        --prefix PATH : ${lib.makeBinPath [ pkgs.mako ]}
     '';
 in
 {
-  nixpkgs.overlays = [ (import ./overlay.nix) ];
-
   home-manager.users.pikpok = {
     programs.waybar = {
       enable = true;
@@ -131,13 +129,15 @@ in
             "on-click" = "${pkgs.pavucontrol}/bin/pavucontrol";
           };
           "custom/media" = {
-            "format" = " {}";
+            "format" = "{icon}{}";
             "return-type" = "json";
-            "max-length" = 40;
-            "escape" = true;
-            "exec" =
-              "${pkgs.waybar-mpris}/bin/waybar-mpris --position --autofocus --order ARTIST:ALBUM:TITLE";
-            "on-click" = "${pkgs.waybar-mpris}/bin/waybar-mpris --send toggle";
+            "format-icons" = {
+              "Playing" = " ";
+              "Paused" = " ";
+            };
+            "max-length" = 70;
+            "exec" = "${pkgs.playerctl}/bin/playerctl -a metadata --format '{\"text\": \"{{playerName}}: {{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F";
+            "on-click" = "${pkgs.playerctl}/bin/playerctl play-pause";
           };
           "custom/dnd" = {
             "exec" = "${waybarDnd}/bin/waybar-dnd";
