@@ -15,6 +15,7 @@ in
       id = 0;
       settings = {
         "signon.rememberSignons" = false;
+        "media.ffmpeg.vaapi.enabled" = true;
       };
     };
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [

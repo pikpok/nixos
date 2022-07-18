@@ -18,6 +18,9 @@ let
       icon-theme:gtk-icon-theme-name \
       cursor-theme:gtk-cursor-theme-name
   '';
+
+  wallpaper = "${./wallpaper.jpg}";
+  lockCommand = "${pkgs.swaylock}/bin/swaylock -f -i ${wallpaper}";
 in
 {
   imports = [ ./waybar ];
@@ -26,6 +29,8 @@ in
     MOZ_ENABLE_WAYLAND = "1";
     # PBP only, for Alacritty to work
     PAN_MESA_DEBUG = "gl3";
+    # Use Wayland for Chromium/Electron apps
+    NIXOS_OZONE_WL = "1";
   };
 
   environment.systemPackages = with pkgs; [
@@ -36,6 +41,7 @@ in
     pavucontrol
     wayvnc
     spot
+    shortwave
   ];
 
   programs.sway.enable = true;
@@ -85,6 +91,20 @@ in
       '';
     };
 
+    services = {
+      swayidle = {
+        enable = true;
+        events = [
+          { event = "after-resume"; command = "swaymsg 'output * dpms on'"; }
+          { event = "before-sleep"; command = lockCommand; }
+        ];
+        timeouts = [
+          { timeout = 300; command = lockCommand; }
+          { timeout = 300; command = "swaymsg 'output * dpms off'"; }
+        ];
+      };
+    };
+
     wayland.windowManager.sway = {
       enable = true;
       systemdIntegration = true;
@@ -102,8 +122,7 @@ in
             command = "${gsettingsCommand}";
           }
           {
-            command =
-              "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+            command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
           }
           {
             command = "mako";
@@ -124,7 +143,7 @@ in
         gaps.inner = 10;
         defaultWorkspace = "workspace 1";
         bars = [{ command = "${pkgs.waybar}/bin/waybar"; }];
-        output = { "*" = { bg = "${./wallpaper.jpg} fill"; }; };
+        output = { "*" = { bg = "${wallpaper} fill"; }; };
         keybindings = {
           "${modifier}+Return" = "exec ${terminal}";
           "${modifier}+d" = "exec ${pkgs.wofi}/bin/wofi --show run";
@@ -133,6 +152,7 @@ in
           "${modifier}+Shift+c" = "reload";
           "${modifier}+Shift+e" = "exit";
           "${modifier}+Shift+q" = "kill";
+          "${modifier}+l" = "exec ${lockCommand}";
           "${modifier}+r" = ''mode "resize"'';
 
           "XF86Display" = "output eDP-1 toggle";
@@ -202,7 +222,6 @@ in
         xdg-desktop-portal-wlr
         xdg-desktop-portal-gtk
       ];
-      gtkUsePortal = true;
     };
   };
 

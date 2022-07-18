@@ -10,11 +10,7 @@
 
     nur.url = "github:nix-community/NUR";
 
-    pinebook-pro = {
-      url = "github:samueldr/wip-pinebook-pro";
-      flake = false;
-    };
-    pinebook-pro.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-hardware.url = github:NixOS/nixos-hardware/master;
   };
 
   outputs = {
@@ -23,12 +19,14 @@
     home-manager,
     nur,
     darwin,
+    nixos-hardware,
     ...
   } @ inputs: {
     nixosConfigurations.pikpok-pbp = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       modules = [
         home-manager.nixosModules.home-manager
+        nixos-hardware.nixosModules.pine64-pinebook-pro
         ./hosts/pbp
         {
           nixpkgs.overlays = [nur.overlay];

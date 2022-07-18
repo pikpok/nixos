@@ -1,15 +1,6 @@
-{ pkgs, lib, home-manager, inputs, ... }:
-let
-  pinebook-fix-sound = (pkgs.writeShellScriptBin "pinebook-fix-sound" ''
-    export NIX_PATH="nixpkgs=${toString inputs.nixpkgs}"
-    export PATH="${lib.makeBinPath [ pkgs.nix ]}:$PATH}"
-    ${inputs.pinebook-pro}/sound/reset-sound.rb
-  '');
-in
-{
+{ pkgs, lib, home-manager, inputs, ... }: {
   imports = [
     ./hardware-configuration.nix
-    "${inputs.pinebook-pro}/pinebook_pro.nix"
     ../../modules/base-linux.nix
 
     ../../modules/audio.nix
@@ -39,14 +30,6 @@ in
       "console=ttyS2,1500000n8"
       "console=tty0"
     ];
-  };
-
-  systemd.services.pinebook-fix-sound = {
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pinebook-fix-sound}/bin/pinebook-fix-sound";
-    };
-    wantedBy = [ "multi-user.target" ];
   };
 
   console.earlySetup = true; # luks
