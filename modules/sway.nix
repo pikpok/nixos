@@ -95,12 +95,16 @@ in
       swayidle = {
         enable = true;
         events = [
-          { event = "after-resume"; command = "swaymsg 'output * dpms on'"; }
+          { event = "after-resume"; command = "${pkgs.sway}/bin/swaymsg \"output * dpms on\""; }
           { event = "before-sleep"; command = lockCommand; }
         ];
         timeouts = [
           { timeout = 300; command = lockCommand; }
-          { timeout = 300; command = "swaymsg 'output * dpms off'"; }
+          {
+            timeout = 305;
+            command = "${pkgs.sway}/bin/swaymsg \"output * dpms off\"";
+            resumeCommand = "${pkgs.sway}/bin/swaymsg \"output * dpms on\"";
+          }
         ];
       };
     };
