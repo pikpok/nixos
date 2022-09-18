@@ -18,7 +18,7 @@
       };
 
       initExtra = ''
-        . ${pkgs.asdf-vm}/share/asdf-vm/asdf.sh
+        . ${pkgs.asdf-vm}/etc/profile.d/asdf-prepare.sh
       '';
     };
   };

@@ -6,10 +6,16 @@
 lib.mkIf pkgs.stdenv.isDarwin {
   homebrew = {
     enable = true;
-    cleanup = "zap";
-    autoUpdate = true;
-    global.brewfile = true;
-    global.noLock = true;
+
+    onActivation = {
+      cleanup = "zap";
+      autoUpdate = true;
+    };
+
+    global = {
+      brewfile = true;
+      lockfiles = true;
+    };
 
     extraConfig = ''
       cask "firefox", args: { language: "pl-PL" }
@@ -35,11 +41,13 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "remarkable"
       "zoom"
       "android-studio"
+      "utm"
     ];
 
     masApps = {
       Xcode = 497799835;
       Wireguard = 1451685025;
+      Broadcasts = 1469995354;
     };
   };
 
