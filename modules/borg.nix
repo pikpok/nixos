@@ -8,6 +8,7 @@
     exclude = [
       "**/node_modules"
       "/home/*/.cache"
+      "/home/*/.local/var"
       "/home/*/.config/Code"
       "/home/*/.vscode"
       "/home/*/Downloads"

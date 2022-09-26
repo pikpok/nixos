@@ -40,7 +40,6 @@ in
     xdg-utils
     pavucontrol
     wayvnc
-    spot
     shortwave
   ];
 

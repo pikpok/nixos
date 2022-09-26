@@ -12,9 +12,10 @@
   home-manager.users.pikpok.home.stateVersion = "18.09";
 
   nix = {
-    package = pkgs.nixFlakes;
-    trustedUsers = ["pikpok"];
-    allowedUsers = ["pikpok" "root"];
+    settings = {
+      trusted-users = ["pikpok"];
+      allowed-users = ["pikpok" "root"];
+    };
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
