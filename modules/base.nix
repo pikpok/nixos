@@ -24,6 +24,7 @@
 
   environment.systemPackages = with pkgs; [
     vim
+    helix
     wget
     git
     bat
