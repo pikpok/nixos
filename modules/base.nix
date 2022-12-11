@@ -28,5 +28,6 @@
     wget
     git
     bat
+    htop
   ];
 }

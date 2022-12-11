@@ -11,6 +11,9 @@
     nur.url = "github:nix-community/NUR";
 
     nixos-hardware.url = github:NixOS/nixos-hardware/master;
+
+    nixos-m1.url = github:tpwrules/nixos-m1/main;
+    nixos-m1.flake = false;
   };
 
   outputs = {
@@ -28,6 +31,20 @@
         home-manager.nixosModules.home-manager
         nixos-hardware.nixosModules.pine64-pinebook-pro
         ./hosts/pbp
+        {
+          nixpkgs.overlays = [nur.overlay];
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+        }
+      ];
+      specialArgs = {inherit inputs;};
+    };
+
+    nixosConfigurations.pikpok-mbp-asahi = nixpkgs.lib.nixosSystem {
+      system = "aarch64-linux";
+      modules = [
+        home-manager.nixosModules.home-manager
+        ./hosts/mbp-asahi
         {
           nixpkgs.overlays = [nur.overlay];
           home-manager.useGlobalPkgs = true;
