@@ -34,6 +34,8 @@
     };
   };
 
+  hardware.asahi.useExperimentalGPUDriver = true;
+
   networking.hostName = "pikpok-mbp-asahi";
   networking.networkmanager.enable = true;
 
