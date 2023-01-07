@@ -3,6 +3,7 @@
   lib,
   home-manager,
   inputs,
+  config,
   ...
 }: {
   imports = [
@@ -28,8 +29,6 @@
     efi.canTouchEfiVariables = false;
     systemd-boot = {
       enable = true;
-      # "error switching console mode" on boot.
-      consoleMode = "auto";
       configurationLimit = 5;
     };
   };

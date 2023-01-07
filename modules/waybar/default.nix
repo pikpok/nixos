@@ -1,37 +1,41 @@
-{ pkgs, lib, home-manager, inputs, ... }:
-
-let
-  waybarDnd = pkgs.runCommandLocal "waybar-dnd"
-    { nativeBuildInputs = [ pkgs.makeWrapper ]; }
+{
+  pkgs,
+  lib,
+  home-manager,
+  inputs,
+  ...
+}: let
+  waybarDnd =
+    pkgs.runCommandLocal "waybar-dnd"
+    {nativeBuildInputs = [pkgs.makeWrapper];}
     ''
       makeWrapper ${../../scripts/waybar-dnd.sh} $out/bin/waybar-dnd \
-        --prefix PATH : ${lib.makeBinPath [ pkgs.mako ]}
+        --prefix PATH : ${lib.makeBinPath [pkgs.mako]}
     '';
-in
-{
+in {
   home-manager.users.pikpok = {
     programs.waybar = {
       enable = true;
-      settings = [{
-        layer = "top";
-        position = "top";
-        modules-left = [ "sway/workspaces" "sway/mode" ];
-        modules-right = [
-          "custom/dnd"
-          "idle_inhibitor"
-          "pulseaudio"
-          "custom/media"
-          "network"
-          "network#ethernet"
-          "network#vpn"
-          "cpu"
-          "memory"
-          "backlight"
-          "battery"
-          "clock"
-          "tray"
-        ];
-        modules = {
+      settings = [
+        {
+          layer = "top";
+          position = "top";
+          modules-left = ["sway/workspaces" "sway/mode"];
+          modules-right = [
+            "custom/dnd"
+            "idle_inhibitor"
+            "pulseaudio"
+            "custom/media"
+            "network"
+            "network#ethernet"
+            "network#vpn"
+            "cpu"
+            "memory"
+            "backlight"
+            "battery"
+            "clock"
+            "tray"
+          ];
           "sway/workspaces" = {
             "all-outputs" = false;
             "format" = "{icon}";
@@ -46,7 +50,7 @@ in
               "default" = "";
             };
           };
-          "sway/mode" = { "format" = ''<span style="italic">{}</span>''; };
+          "sway/mode" = {"format" = ''<span style="italic">{}</span>'';};
           "idle_inhibitor" = {
             "format" = "{icon}";
             "format-icons" = {
@@ -54,7 +58,7 @@ in
               "deactivated" = "";
             };
           };
-          "tray" = { "spacing" = 10; };
+          "tray" = {"spacing" = 10;};
           "clock" = {
             "locale" = "C";
             "format" = "{:%Y-%m-%d %H:%M}";
@@ -63,14 +67,14 @@ in
               <tt><small>{calendar}</small></tt>'';
             "on-click" = "gsimplecal";
           };
-          "cpu" = { "format" = " {usage}%"; };
+          "cpu" = {"format" = " {usage}%";};
           "memory" = {
             "format" = " {}%";
             "tooltip" = "{used:0.1f}G/{total:0.1f}G ";
           };
           "backlight" = {
             "format" = "{icon} {percent}%";
-            "format-icons" = [ "" "" ];
+            "format-icons" = ["" ""];
           };
           "battery" = {
             "states" = {
@@ -83,7 +87,7 @@ in
             "format-plugged" = " {capacity}%";
             "format-full" = " {capacity}%";
             "format" = "{time} ({capacity}%) {icon}";
-            "format-icons" = [ "" "" "" "" "" ];
+            "format-icons" = ["" "" "" "" ""];
           };
           "network" = {
             "interface" = "wl*";
@@ -124,7 +128,7 @@ in
               "phone" = "";
               "portable" = "";
               "car" = "";
-              "default" = [ "" "" "" ];
+              "default" = ["" "" ""];
             };
             "on-click" = "${pkgs.pavucontrol}/bin/pavucontrol";
           };
@@ -146,8 +150,8 @@ in
             "interval" = "once";
             "on-click" = "${waybarDnd}/bin/waybar-dnd toggle";
           };
-        };
-      }];
+        }
+      ];
     };
 
     xdg.configFile."waybar/style.css".source = ./style.css;
