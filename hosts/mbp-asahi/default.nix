@@ -9,7 +9,7 @@
   imports = [
     ./hardware-configuration.nix
 
-    "${inputs.nixos-m1}/nix/m1-support"
+    "${inputs.nixos-m1}/apple-silicon-support"
 
     ../../modules/base-linux.nix
 

@@ -29,5 +29,7 @@
     git
     bat
     htop
+    jq
+    httpie
   ];
 }

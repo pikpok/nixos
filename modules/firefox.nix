@@ -32,16 +32,16 @@ in {
         "signon.rememberSignons" = false;
         "media.ffmpeg.vaapi.enabled" = true;
       };
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        ublock-origin
+        keepassxc-browser
+        vimium
+        multi-account-containers
+        react-devtools
+        # TODO: sticky-window-containers, ModHeader
+        (lib.mkIf includeFxCast pkgs.nur.repos.ijohanne.firefoxPlugins.fx-cast)
+      ];
     };
-    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      ublock-origin
-      keepassxc-browser
-      vimium
-      multi-account-containers
-      react-devtools
-      # TODO: sticky-window-containers, ModHeader
-      (lib.mkIf includeFxCast pkgs.nur.repos.ijohanne.firefoxPlugins.fx-cast)
-    ];
   };
 
   environment.systemPackages = [

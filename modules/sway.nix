@@ -41,11 +41,16 @@ in
     pavucontrol
     wayvnc
     shortwave
+    evince
+    xfce.thunar
+    xfce.tumbler
   ];
 
   programs.sway.enable = true;
 
   services.getty.autologinUser = "pikpok";
+
+  services.gvfs.enable = true;
 
   fonts.fonts = with pkgs; [ font-awesome ];
 
@@ -157,6 +162,7 @@ in
           "${modifier}+Shift+q" = "kill";
           "${modifier}+l" = "exec ${lockCommand}";
           "${modifier}+r" = ''mode "resize"'';
+          "${modifier}+i" = "exec ${pkgs.rofimoji}/bin/rofimoji";
 
           "XF86Display" = "output eDP-1 toggle";
           "XF86AudioRaiseVolume" = "exec ${pkgs.pamixer}/bin/pamixer -i 5";

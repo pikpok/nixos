@@ -68,6 +68,7 @@ window#waybar.chromium {
 #custom-media,
 #custom-bt-battery,
 #custom-dnd,
+#custom-dark-mode,
 #tray,
 #mode,
 #idle_inhibitor {
@@ -78,10 +79,12 @@ window#waybar.chromium {
     margin-top: 10px;
 }
 
+#custom-dark-mode,
 #custom-dnd {
     background-color: #2d3436;
 }
 
+#custom-dark-mode.on,
 #custom-dnd.on {
     background-color: #ffffff;
     color: #000000;

@@ -3,6 +3,12 @@
   programs.zsh.promptInit = "";
   users.users.pikpok.shell = pkgs.zsh;
 
+  programs.adb.enable = true;
+  users.users.pikpok.extraGroups = ["adbusers"];
+  services.udev.packages = [
+    pkgs.android-udev-rules
+  ];
+
   home-manager.users.pikpok = {
     programs.direnv.enable = true;
     programs.direnv.nix-direnv.enable = true;

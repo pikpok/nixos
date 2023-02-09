@@ -12,6 +12,13 @@
       makeWrapper ${../../scripts/waybar-dnd.sh} $out/bin/waybar-dnd \
         --prefix PATH : ${lib.makeBinPath [pkgs.mako]}
     '';
+  waybarDarkMode =
+    pkgs.runCommandLocal "waybar-dark-mode"
+    {nativeBuildInputs = [pkgs.makeWrapper];}
+    ''
+      makeWrapper ${../../scripts/waybar-dark-mode.sh} $out/bin/waybar-dark-mode \
+        --prefix PATH : ${lib.makeBinPath [pkgs.glib]}
+    '';
 in {
   home-manager.users.pikpok = {
     programs.waybar = {
@@ -22,6 +29,7 @@ in {
           position = "top";
           modules-left = ["sway/workspaces" "sway/mode"];
           modules-right = [
+            "custom/dark-mode"
             "custom/dnd"
             "idle_inhibitor"
             "pulseaudio"
@@ -149,6 +157,13 @@ in {
             "signal" = 2;
             "interval" = "once";
             "on-click" = "${waybarDnd}/bin/waybar-dnd toggle";
+          };
+          "custom/dark-mode" = {
+            "exec" = "${waybarDarkMode}/bin/waybar-dark-mode";
+            "return-type" = "json";
+            "signal" = 2;
+            "interval" = "once";
+            "on-click" = "${waybarDarkMode}/bin/waybar-dark-mode toggle";
           };
         }
       ];
