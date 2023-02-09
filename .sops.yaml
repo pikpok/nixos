@@ -1,0 +1,9 @@
+keys:
+  - &key age1ch2vy79p2dwxn4myapyvdzgrasm2al5us98y4duh2tfqusaaxptqleqptv
+  - &mbp-asahi-ssh age1ajwvtlhvkldqjwhhvylp29cndnhxq2ntwygmrv5a0ucrlq7m4p3s5cx2dh
+creation_rules:
+  - path_regex: secrets/[^/]+\.yaml$
+    key_groups:
+    - age:
+      - *key
+      - *mbp-asahi-ssh

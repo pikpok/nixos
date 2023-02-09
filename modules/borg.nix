@@ -1,4 +1,7 @@
 {
+  sops.secrets."borgbase/ssh_key" = {};
+  sops.secrets."borgbase/passphrase" = {};
+
   services.borgbackup.jobs."borgbase" = {
     paths = [
       "/etc/NetworkManager/system-connections/"
@@ -10,16 +13,18 @@
       "/home/*/.cache"
       "/home/*/.local/var"
       "/home/*/.config/Code"
+      "/home/*/dev/mi5"
+      "/home/*/go"
       "/home/*/.vscode"
       "/home/*/Downloads"
       "/home/*/Nextcloud"
     ];
-    repo = "q038gaqn@q038gaqn.repo.borgbase.com:repo";
+    repo = "m3wwh76g@m3wwh76g.repo.borgbase.com:repo";
     encryption = {
       mode = "repokey-blake2";
-      passCommand = "cat /root/borgbackup/passphrase";
+      passCommand = "cat /run/secrets/borgbase/passphrase";
     };
-    environment.BORG_RSH = "ssh -i /root/borgbackup/ssh_key";
+    environment.BORG_RSH = "ssh -i /run/secrets/borgbase/ssh_key";
     compression = "auto,lzma";
     startAt = "hourly";
   };

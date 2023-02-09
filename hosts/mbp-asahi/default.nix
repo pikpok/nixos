@@ -22,7 +22,10 @@
     ../../modules/vscode.nix
     ../../modules/sway.nix
     ../../modules/shell.nix
+    ../../modules/wireguard.nix
   ];
+
+  sops.defaultSopsFile = ../../secrets/mbp-asahi.yaml;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader = {
