@@ -32,7 +32,7 @@
     efi.canTouchEfiVariables = false;
     systemd-boot = {
       enable = true;
-      configurationLimit = 5;
+      configurationLimit = 3;
     };
   };
 
