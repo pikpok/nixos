@@ -1,5 +1,8 @@
-{ pkgs, home-manager, ... }:
-let
+{
+  pkgs,
+  home-manager,
+  ...
+}: let
   gsettings = "${pkgs.glib}/bin/gsettings";
   gsettingsScript = pkgs.writeShellScript "gsettings-auto.sh" ''
     expression=""
@@ -21,9 +24,10 @@ let
 
   wallpaper = "${./wallpaper.jpg}";
   lockCommand = "${pkgs.swaylock}/bin/swaylock -f -i ${wallpaper}";
-in
-{
-  imports = [ ./waybar ];
+
+  valent = pkgs.callPackage ./valent.nix {};
+in {
+  imports = [./waybar];
 
   environment.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "1";
@@ -44,6 +48,7 @@ in
     evince
     xfce.thunar
     xfce.tumbler
+    valent
   ];
 
   programs.sway.enable = true;
@@ -52,7 +57,7 @@ in
 
   services.gvfs.enable = true;
 
-  fonts.fonts = with pkgs; [ font-awesome ];
+  fonts.fonts = with pkgs; [font-awesome];
 
   home-manager.users.pikpok = {
     gtk = {
@@ -82,6 +87,8 @@ in
         backgroundColor = "#273238";
         borderColor = "#273238";
         extraConfig = ''
+          on-button-middle=exec ${pkgs.mako}/bin/makoctl menu -n "$id" ${pkgs.wofi}/bin/wofi --show dmenu -p 'Select action: '
+
           [mode=dnd]
           invisible=1
         '';
@@ -99,11 +106,20 @@ in
       swayidle = {
         enable = true;
         events = [
-          { event = "after-resume"; command = "${pkgs.sway}/bin/swaymsg \"output * dpms on\""; }
-          { event = "before-sleep"; command = lockCommand; }
+          {
+            event = "after-resume";
+            command = "${pkgs.sway}/bin/swaymsg \"output * dpms on\"";
+          }
+          {
+            event = "before-sleep";
+            command = lockCommand;
+          }
         ];
         timeouts = [
-          { timeout = 300; command = lockCommand; }
+          {
+            timeout = 300;
+            command = lockCommand;
+          }
           {
             timeout = 305;
             command = "${pkgs.sway}/bin/swaymsg \"output * dpms off\"";
@@ -136,7 +152,10 @@ in
             command = "mako";
           }
           # Sleep to make sure tray (waybar) loads first
-          { command = "sleep 10 && nextcloud"; }
+          {command = "sleep 10 && nextcloud";}
+          {
+            command = "${valent}/bin/valent";
+          }
         ];
         modifier = "Mod4";
         window.border = 0;
@@ -150,8 +169,8 @@ in
         };
         gaps.inner = 10;
         defaultWorkspace = "workspace 1";
-        bars = [{ command = "${pkgs.waybar}/bin/waybar"; }];
-        output = { "*" = { bg = "${wallpaper} fill"; }; };
+        bars = [{command = "${pkgs.waybar}/bin/waybar";}];
+        output = {"*" = {bg = "${wallpaper} fill";};};
         keybindings = {
           "${modifier}+Return" = "exec ${terminal}";
           "${modifier}+d" = "exec ${pkgs.wofi}/bin/wofi --show run";
@@ -221,7 +240,6 @@ in
         };
       };
     };
-
   };
 
   xdg = {
