@@ -81,7 +81,15 @@ in {
       };
     };
 
-    programs = {
+    programs.zsh.loginExtra = ''
+      if [ "$(tty)" = "/dev/tty1" ]; then
+        export XDG_SESSION_TYPE=wayland
+        mv sway.log sway.log.old
+        exec sway > ~/sway.log 2>&1
+      fi
+    '';
+
+    services = {
       mako = {
         enable = true;
         backgroundColor = "#273238";
@@ -93,16 +101,7 @@ in {
           invisible=1
         '';
       };
-      zsh.loginExtra = ''
-        if [ "$(tty)" = "/dev/tty1" ]; then
-          export XDG_SESSION_TYPE=wayland
-          mv sway.log sway.log.old
-          exec sway > ~/sway.log 2>&1
-        fi
-      '';
-    };
 
-    services = {
       swayidle = {
         enable = true;
         events = [

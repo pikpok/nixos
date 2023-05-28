@@ -10,8 +10,8 @@ pkgs.stdenv.mkDerivation rec {
   src = pkgs.fetchFromGitHub {
     owner = "andyholmes";
     repo = "valent";
-    rev = "bd1126818bb8f123ceafc6a449cf26102f75293e";
-    hash = "sha256-YLvuPBaykeORLBj1cxT8KFYD02KaK3KuAKZNUf8QhMs=";
+    rev = "85f6081641176680a6ef11707c0ac474482eee86";
+    hash = "sha256-rCjnmoFfiouu4GEagvxcWSRBTTBcnXhSY0jHSxkmrX8=";
     fetchSubmodules = true;
   };
 
@@ -46,6 +46,7 @@ pkgs.stdenv.mkDerivation rec {
     openssl
     alsa-lib
     libpulseaudio
+    vala
   ];
 
   meta = with lib; {
