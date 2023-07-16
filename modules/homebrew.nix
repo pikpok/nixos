@@ -41,13 +41,13 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "remarkable"
       "zoom"
       "android-studio"
-      "utm"
+      "figma"
+      "betterdisplay"
     ];
 
     masApps = {
       Xcode = 497799835;
       Wireguard = 1451685025;
-      Broadcasts = 1469995354;
     };
   };
 

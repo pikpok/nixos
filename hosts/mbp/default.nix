@@ -19,12 +19,7 @@
   environment.systemPackages = with pkgs; [
     obsidian
     asdf-vm
-    go
-
-    # Docker
-    podman
-    podman-compose
-    qemu
+    go_1_20
   ];
 
   system.stateVersion = 4; # Did you read the comment?
