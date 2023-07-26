@@ -38,7 +38,12 @@ in {
         vimium
         multi-account-containers
         react-devtools
-        # TODO: sticky-window-containers, ModHeader
+        violentmonkey
+        modheader
+        sponsorblock
+        dearrow
+        open-url-in-container
+        # TODO: sticky-window-containers
         (lib.mkIf includeFxCast pkgs.nur.repos.ijohanne.firefoxPlugins.fx-cast)
       ];
     };

@@ -43,6 +43,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "android-studio"
       "figma"
       "betterdisplay"
+      "beeper"
     ];
 
     masApps = {
