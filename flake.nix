@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs = {url = "github:nixos/nixpkgs/nixos-unstable";};
+    nixpkgs.url = "github:nixos/nixpkgs/master";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -50,6 +50,20 @@
         home-manager.nixosModules.home-manager
         sops-nix.nixosModules.sops
         ./hosts/mbp-asahi
+        {
+          nixpkgs.overlays = [nur.overlay];
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+        }
+      ];
+      specialArgs = {inherit inputs;};
+    };
+
+    nixosConfigurations.raspberrypi = nixpkgs.lib.nixosSystem {
+      system = "aarch64-linux";
+      modules = [
+        home-manager.nixosModules.home-manager
+        ./hosts/raspberrypi
         {
           nixpkgs.overlays = [nur.overlay];
           home-manager.useGlobalPkgs = true;

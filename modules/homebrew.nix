@@ -14,7 +14,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
 
     global = {
       brewfile = true;
-      lockfiles = true;
+      lockfiles = false;
     };
 
     extraConfig = ''
@@ -22,33 +22,45 @@ lib.mkIf pkgs.stdenv.isDarwin {
     '';
 
     taps = [
-      "homebrew/core"
-      "homebrew/cask"
+      "homebrew/services"
+    ];
+
+    brews = [
+      {
+        name = "ollama";
+        restart_service = "changed";
+      }
     ];
 
     casks = [
       "keepassxc"
       "firefox"
       "nextcloud"
-      "tunnelblick"
       "spotify"
       "steam"
-      "signal"
       "ngrok"
-      "android-file-transfer"
       "calibre"
-      "messenger"
       "remarkable"
       "zoom"
       "android-studio"
-      "figma"
       "betterdisplay"
       "beeper"
+      "fx-cast-bridge"
+      "utm"
+      "raycast"
+      "iterm2"
+      "orbstack"
+      "notion"
+      "screen-studio"
+      "openmtp"
+      "aldente"
     ];
 
     masApps = {
       Xcode = 497799835;
       Wireguard = 1451685025;
+      Capcut = 1500855883;
+      Cog = 1630499622;
     };
   };
 

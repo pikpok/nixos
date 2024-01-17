@@ -13,17 +13,5 @@
   services.upower.enable = true;
   services.openssh.enable = true;
 
-  networking.firewall.allowedTCPPorts = [
-    1716 # Valent/KDE Connect
-    5900 # Wireguard
-  ];
-
-  # Valent/KDE Connect
-  networking.firewall.allowedUDPPorts = [1716];
-  networking.firewall.allowedTCPPortRanges = [
-    {
-      from = 1739;
-      to = 1764;
-    }
-  ];
+  networking.firewall.enable = false;
 }
