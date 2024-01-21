@@ -27,7 +27,7 @@ in {
         {
           layer = "top";
           position = "top";
-          modules-left = ["sway/workspaces" "sway/mode"];
+          modules-left = ["hyprland/workspaces" "hyprland/submap"];
           modules-right = [
             "custom/dark-mode"
             "custom/dnd"
@@ -44,7 +44,7 @@ in {
             "clock"
             "tray"
           ];
-          "sway/workspaces" = {
+          "hyprland/workspaces" = {
             "all-outputs" = false;
             "format" = "{icon}";
             "format-icons" = {
@@ -54,11 +54,11 @@ in {
               "4" = "";
               "5" = "";
               "urgent" = "";
-              "focused" = "";
+              "active" = "";
               "default" = "";
             };
           };
-          "sway/mode" = {"format" = ''<span style="italic">{}</span>'';};
+          "hyprland/submap" = {"format" = ''<span style="italic">{}</span>'';};
           "idle_inhibitor" = {
             "format" = "{icon}";
             "format-icons" = {
@@ -116,7 +116,7 @@ in {
             "on-click-middle" = "nm-connection-editor";
           };
           "network#vpn" = {
-            "interface" = "tun*";
+            "interface" = "wg0";
             "format-ethernet" = "";
             "format-alt" = "{ifname}: {ipaddr}/{cidr}";
             "tooltip-format-ethernet" = "VPN {ifname}: {ipaddr}/{cidr}";

@@ -1,4 +1,4 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [vscode];
-  fonts.fonts = with pkgs; [fira-code];
+  fonts.packages = with pkgs; [fira-code];
 }

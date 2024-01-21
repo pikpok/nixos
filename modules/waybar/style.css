@@ -1,7 +1,7 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: Hack, Roboto, Helvetica, Arial, sans-serif;
+    font-family: Fira Code, Roboto, Helvetica, Arial, sans-serif;
     font-size: 14px;
     min-height: 0;
 }
@@ -45,7 +45,7 @@ window#waybar.chromium {
     box-shadow: inherit;
 }
 
-#workspaces button.focused {
+#workspaces button.active {
     background-color: #64727D;
 }
 
@@ -53,7 +53,7 @@ window#waybar.chromium {
     background-color: #eb4d4b;
 }
 
-#mode {
+#submap {
     background-color: #64727D;
 }
 

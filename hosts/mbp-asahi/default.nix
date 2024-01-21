@@ -20,7 +20,7 @@
     ../../modules/firefox.nix
     ../../modules/user.nix
     ../../modules/vscode.nix
-    ../../modules/sway.nix
+    ../../modules/hyprland.nix
     ../../modules/shell.nix
     ../../modules/wireguard.nix
   ];
@@ -36,13 +36,16 @@
     };
   };
 
+  # TODO: Plymouth doesn't work?
+  boot.initrd.systemd.enable = true;
+  boot.plymouth.enable = true;
+
   hardware.asahi.useExperimentalGPUDriver = true;
+  sound.enable = true;
 
   networking.hostName = "pikpok-mbp-asahi";
   networking.networkmanager.enable = true;
-
-  # Temporarily override scaling for all displays here until I find better solution
-  home-manager.users.pikpok.wayland.windowManager.sway.config.output."*".scale = "2";
+  networking.networkmanager.wifi.backend = "iwd";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -8,7 +8,7 @@
     ../../modules/borg.nix
     ../../modules/docker.nix
     ../../modules/firefox.nix
-    ../../modules/sway.nix
+    ../../modules/hyprland.nix
     ../../modules/user.nix
     ../../modules/vscode.nix
     ../../modules/shell.nix

@@ -9,17 +9,20 @@
     ];
 
   boot.initrd.availableKernelModules = [ "usbhid" "usb_storage" "sdhci_pci" ];
+  boot.kernelParams = [ "quiet" "udev.log_level=3" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/58c35e47-98a8-481d-8e66-f6d5a30c0713";
+    { device = "/dev/disk/by-uuid/bbefcfe7-d9b8-44ee-bad5-77d521eea570";
       fsType = "ext4";
     };
 
+  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/8a966be4-3e73-4065-8231-db983add3f6b";
+
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/8B35-1E04";
+    { device = "/dev/disk/by-uuid/F853-1E22";
       fsType = "vfat";
     };
 
@@ -30,8 +33,7 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp1s0f0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlan0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
-  powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
 }
