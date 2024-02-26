@@ -8,9 +8,10 @@
   };
 
   systemd.services."xoler-backup" = {
+    path = [ pkgs.openssh ];
     script = ''
       set -eu
-      cd /mnt/nas/Backups/xoler/ && ${pkgs.bash}/bin/bash backup.sh
+      cd /mnt/nas/Backups/xoler/ && ./backup.sh
     '';
     serviceConfig = {
       Type = "oneshot";
@@ -27,9 +28,10 @@
   };
 
   systemd.services."vps-backup" = {
+    path = [ pkgs.openssh pkgs.rsync ];
     script = ''
       set -eu
-      cd /mnt/nas/Backups/vps/ && ${pkgs.bash}/bin/bash backup.sh
+      cd /mnt/nas/Backups/vps/ && ./backup.sh
     '';
     serviceConfig = {
       Type = "oneshot";
