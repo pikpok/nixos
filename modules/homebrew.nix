@@ -54,6 +54,8 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "screen-studio"
       "openmtp"
       "aldente"
+      "tidal"
+      "cursor"
     ];
 
     masApps = {

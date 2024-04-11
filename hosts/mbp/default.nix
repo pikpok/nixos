@@ -19,7 +19,6 @@
   environment.systemPackages = with pkgs; [
     obsidian
     asdf-vm
-    go_1_20
   ];
 
   system.stateVersion = 4; # Did you read the comment?
