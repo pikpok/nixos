@@ -3,7 +3,7 @@
     backend = "podman";
     containers = {
       pihole = {
-        image = "pihole/pihole:2024.02.2";
+        image = "pihole/pihole:2024.03.2";
         extraOptions = [
           "--network=host"
           "--cap-add=NET_ADMIN" # Needed for DHCP
@@ -25,7 +25,7 @@
           "/run/dbus:/run/dbus:ro"
         ];
         environment.TZ = "Europe/Warsaw";
-        image = "ghcr.io/home-assistant/home-assistant:2024.2.4";
+        image = "ghcr.io/home-assistant/home-assistant:2024.4.2";
         extraOptions = [
           "--network=host"
           "--cap-add=NET_ADMIN" # Needed for DHCP
@@ -42,7 +42,7 @@
           TZ = "Europe/Warsaw";
         };
         ports = ["4000:4000"];
-        image = "teslamate/teslamate:1.28.3";
+        image = "teslamate/teslamate:1.28.5";
       };
       teslamate-abrp = {
         image = "fetzu/teslamate-abrp:3.0.0";

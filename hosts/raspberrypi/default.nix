@@ -31,9 +31,13 @@
       device = "/dev/disk/by-label/NIXOS_SD";
       fsType = "ext4";
     };
-    "/mnt/nas" = {
+    "/mnt/nas-ntfs" = {
       device = "/dev/disk/by-label/NASNTFS";
       options = ["x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,uid=1000,gid=100"];
+    };
+    "/mnt/nas" = {
+      device = "/dev/disk/by-label/NAS";
+      options = ["x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s"];
     };
   };
 
@@ -55,7 +59,7 @@
 
   networking.hostName = "raspberrypi";
 
-  boot.kernelParams = ["console=ttyS0,115200n8" "console=tty0" "usb_storage.quirks=152d:0578:u"];
+  boot.kernelParams = ["console=ttyS0,115200n8" "console=tty0" "usb_storage.quirks=0bc2:3343:u,152d:0578:u"];
   boot.loader.grub.enable = false;
   boot.loader.generic-extlinux-compatible.enable = true;
 
@@ -107,8 +111,20 @@
       hosts deny = 0.0.0.0/0
       guest account = nobody
       map to guest = bad user
+
+      # Time machine config
+      min protocol = SMB2
+      server min protocol = SMB2
     '';
     shares = {
+      NASNTFS = {
+        path = "/mnt/nas-ntfs";
+        browseable = "yes";
+        "read only" = "no";
+        "guest ok" = "yes";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+      };
       NAS = {
         path = "/mnt/nas";
         browseable = "yes";
@@ -117,8 +133,30 @@
         "create mask" = "0644";
         "directory mask" = "0755";
       };
+      "Time Machine" = {
+        path = "/mnt/nas/Time-Machine";
+        public = "no";
+        writeable = "yes";
+        "fruit:aapl" = "yes";
+        "fruit:time machine" = "yes";
+        "fruit:model" = "TimeCapsule8,119";
+        "fruit:metadata" = "stream";
+        "fruit:posix_rename" = "yes";
+        "fruit:veto_appledouble" = "no";
+        "fruit:nfs_aces" = "no";
+        "fruit:encoding" = "private";
+        "fruit:wipe_intentionally_left_blank_rfork" = "yes";
+        "fruit:delete_empty_adfiles" = "yes";
+        "vfs objects" = "catia fruit streams_xattr";
+      };
     };
   };
+
+  users.users.time-machine = {
+    isSystemUser = true;
+    group = "time-machine";
+  };
+  users.groups.time-machine = {};
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
