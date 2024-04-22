@@ -10,12 +10,12 @@
 
     nur.url = "github:nix-community/NUR";
 
-    nixos-hardware.url = github:NixOS/nixos-hardware/master;
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    nixos-m1.url = github:tpwrules/nixos-m1/main;
+    nixos-m1.url = "github:tpwrules/nixos-m1/main";
     nixos-m1.inputs.nixpkgs.follows = "nixpkgs";
 
-    sops-nix.url = github:Mic92/sops-nix;
+    sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
