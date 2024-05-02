@@ -39,8 +39,7 @@ in {
         multi-account-containers
         react-devtools
         violentmonkey
-        modheader
-        sponsorblock
+                sponsorblock
         dearrow
         open-url-in-container
         # TODO: sticky-window-containers
