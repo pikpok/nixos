@@ -1,11 +1,4 @@
 {
-  pkgs,
-  lib,
-  home-manager,
-  inputs,
-  modulesPath,
-  ...
-}: {
   imports = [
     ../../modules/base-linux.nix
 
@@ -19,6 +12,7 @@
     ./photoprism.nix
     ./backup.nix
     ./containers.nix
+    ./samba.nix
   ];
 
   fileSystems = {
@@ -48,48 +42,56 @@
     }
   ];
 
-  boot.initrd.availableKernelModules = [
-    "xhci_pci"
-    "usb_storage"
-    "uas"
-    "xhci-pci-renesas"
-    "pcie-brcmstb"
-    "reset-raspberrypi"
-  ];
+  networking = {
+    hostName = "raspberrypi";
 
-  networking.hostName = "raspberrypi";
+    interfaces.end0.ipv4.addresses = [
+      {
+        address = "192.168.100.8";
+        prefixLength = 24;
+      }
+    ];
+    defaultGateway = "192.168.100.1";
+    nameservers = ["192.168.100.8" "1.1.1.1"];
+    useDHCP = false;
 
-  boot.kernelParams = ["console=ttyS0,115200n8" "console=tty0" "usb_storage.quirks=0bc2:3343:u,152d:0578:u"];
-  boot.loader.grub.enable = false;
-  boot.loader.generic-extlinux-compatible.enable = true;
-
-  networking.interfaces.end0.ipv4.addresses = [
-    {
-      address = "192.168.100.8";
-      prefixLength = 24;
-    }
-  ];
-  networking.defaultGateway = "192.168.100.1";
-  networking.nameservers = ["192.168.100.8" "1.1.1.1"];
-  networking.useDHCP = false;
-
-  boot.supportedFilesystems = ["ntfs"];
-  hardware.enableRedistributableFirmware = true;
-
-  networking.wireguard.interfaces = {
-    wg0 = {
-      ips = ["10.77.0.7/24"];
-      privateKeyFile = "/root/wireguard-key";
-      peers = [
-        {
-          publicKey = "zJc1neQD2vufvtJPkReaNXlElPQuuBjizW6wwu1pmnA=";
-          allowedIPs = ["10.77.0.0/24"];
-          endpoint = "c.pikpok.xyz:51820";
-          persistentKeepalive = 25;
-        }
-      ];
+    wireguard.interfaces = {
+      wg0 = {
+        ips = ["10.77.0.7/24"];
+        privateKeyFile = "/root/wireguard-key";
+        peers = [
+          {
+            publicKey = "zJc1neQD2vufvtJPkReaNXlElPQuuBjizW6wwu1pmnA=";
+            allowedIPs = ["10.77.0.0/24"];
+            endpoint = "c.pikpok.xyz:51820";
+            persistentKeepalive = 25;
+          }
+        ];
+      };
     };
   };
+
+  boot = {
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "usb_storage"
+      "uas"
+      "xhci-pci-renesas"
+      "pcie-brcmstb"
+      "reset-raspberrypi"
+    ];
+
+    kernelParams = ["console=ttyS0,115200n8" "console=tty0" "usb_storage.quirks=0bc2:3343:u,152d:0578:u"];
+
+    loader = {
+      grub.enable = false;
+      generic-extlinux-compatible.enable = true;
+    };
+
+    supportedFilesystems = ["ntfs"];
+  };
+
+  hardware.enableRedistributableFirmware = true;
 
   services.uptime-kuma = {
     enable = true;
@@ -97,66 +99,6 @@
       HOST = "0.0.0.0";
     };
   };
-
-  services.samba-wsdd.enable = true; # make shares visible for windows 10 clients
-  services.samba = {
-    enable = true;
-    securityType = "user";
-    extraConfig = ''
-      workgroup = WORKGROUP
-      server string = raspberrypi
-      netbios name = raspberrypi
-      security = user
-      hosts allow = 192.168.100. 127.0.0.1 localhost
-      hosts deny = 0.0.0.0/0
-      guest account = nobody
-      map to guest = bad user
-
-      # Time machine config
-      min protocol = SMB2
-      server min protocol = SMB2
-    '';
-    shares = {
-      NASNTFS = {
-        path = "/mnt/nas-ntfs";
-        browseable = "yes";
-        "read only" = "no";
-        "guest ok" = "yes";
-        "create mask" = "0644";
-        "directory mask" = "0755";
-      };
-      NAS = {
-        path = "/mnt/nas";
-        browseable = "yes";
-        "read only" = "no";
-        "guest ok" = "yes";
-        "create mask" = "0644";
-        "directory mask" = "0755";
-      };
-      "Time Machine" = {
-        path = "/mnt/nas/Time-Machine";
-        public = "no";
-        writeable = "yes";
-        "fruit:aapl" = "yes";
-        "fruit:time machine" = "yes";
-        "fruit:model" = "TimeCapsule8,119";
-        "fruit:metadata" = "stream";
-        "fruit:posix_rename" = "yes";
-        "fruit:veto_appledouble" = "no";
-        "fruit:nfs_aces" = "no";
-        "fruit:encoding" = "private";
-        "fruit:wipe_intentionally_left_blank_rfork" = "yes";
-        "fruit:delete_empty_adfiles" = "yes";
-        "vfs objects" = "catia fruit streams_xattr";
-      };
-    };
-  };
-
-  users.users.time-machine = {
-    isSystemUser = true;
-    group = "time-machine";
-  };
-  users.groups.time-machine = {};
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
