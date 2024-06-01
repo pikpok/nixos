@@ -1,9 +1,14 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  teslamate-version = "1.29.1";
+  teslamate-abrp-version = "3.0.1";
+  pihole-version = "2024.05.0";
+  home-assistant-version = "2024.5.5";
+in {
   virtualisation.oci-containers = {
     backend = "podman";
     containers = {
       pihole = {
-        image = "pihole/pihole:2024.03.2";
+        image = "pihole/pihole:${pihole-version}";
         extraOptions = [
           "--network=host"
           "--cap-add=NET_ADMIN" # Needed for DHCP
@@ -25,7 +30,7 @@
           "/run/dbus:/run/dbus:ro"
         ];
         environment.TZ = "Europe/Warsaw";
-        image = "ghcr.io/home-assistant/home-assistant:2024.4.2";
+        image = "ghcr.io/home-assistant/home-assistant:${home-assistant-version}";
         extraOptions = [
           "--network=host"
           "--cap-add=NET_ADMIN" # Needed for DHCP
@@ -33,6 +38,8 @@
         ];
       };
       teslamate = {
+        image = "teslamate/teslamate:${teslamate-version}";
+        ports = ["4000:4000"];
         environmentFiles = ["/root/teslamate.env"];
         environment = {
           DATABASE_USER = "teslamate";
@@ -41,11 +48,9 @@
           MQTT_HOST = "host.docker.internal";
           TZ = "Europe/Warsaw";
         };
-        ports = ["4000:4000"];
-        image = "teslamate/teslamate:1.28.5";
       };
       teslamate-abrp = {
-        image = "fetzu/teslamate-abrp:3.0.0";
+        image = "fetzu/teslamate-abrp:${teslamate-abrp-version}";
         environmentFiles = ["/root/teslamate-abrp.env"];
         environment = {
           MQTT_SERVER = "host.docker.internal";
