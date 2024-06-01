@@ -1,32 +1,43 @@
 {pkgs, ...}: {
+  sops.secrets."borgmatic" = {
+    sopsFile = ../../secrets/raspberrypi/borgmatic.env;
+    format = "dotenv";
+  };
+
+  systemd.services."borgmatic" = {
+    overrideStrategy = "asDropin";
+    serviceConfig.EnvironmentFile = "/run/secrets/borgmatic";
+  };
+
   services.borgmatic = {
     enable = true;
     configurations = {
       nas = {
         keep_daily = 7;
         keep_monthly = 6;
-        encryption_passcommand = "${pkgs.coreutils}/bin/cat /root/borg-enc-key";
         source_directories = [
           "/mnt/nas/Music"
           "/mnt/nas/Photos"
         ];
         repositories = [
           {
-            path = "ssh://u395343@u395343.your-storagebox.de:23/./nas";
+            path = "$\{HETZNER_NAS_REPO_PATH\}";
             label = "hetzner";
           }
         ];
+        healthchecks = {
+          ping_url = "$\{HEALTHCHECKS_NAS_PING_URL\}";
+        };
       };
       raspberrypi = {
         keep_daily = 7;
         keep_monthly = 6;
-        encryption_passcommand = "${pkgs.coreutils}/bin/cat /root/borg-enc-key";
         source_directories = [
           "/var/lib/private"
         ];
         repositories = [
           {
-            path = "ssh://u395343@u395343.your-storagebox.de:23/./raspberrypi";
+            path = "$\{HETZNER_RASPBERRYPI_REPO_PATH\}";
             label = "hetzner";
           }
         ];
@@ -34,8 +45,12 @@
           {
             name = "all";
             username = "postgres";
+            pg_dump_command = "${pkgs.postgresql_16}/bin/pg_dumpall";
           }
         ];
+        healthchecks = {
+          ping_url = "$\{HEALTHCHECKS_RASPBERRYPI_PING_URL\}";
+        };
       };
     };
   };

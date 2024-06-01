@@ -1,11 +1,4 @@
-{
-  pkgs,
-  lib,
-  home-manager,
-  inputs,
-  config,
-  ...
-}: {
+{inputs, ...}: {
   imports = [
     ./hardware-configuration.nix
 
@@ -25,7 +18,7 @@
     ../../modules/wireguard.nix
   ];
 
-  sops.defaultSopsFile = ../../secrets/mbp-asahi.yaml;
+  sops.defaultSopsFile = ../../secrets/mbp-asahi/secrets.yaml;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader = {

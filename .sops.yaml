@@ -1,9 +1,15 @@
 keys:
   - &key age1ch2vy79p2dwxn4myapyvdzgrasm2al5us98y4duh2tfqusaaxptqleqptv
   - &mbp-asahi-ssh age1ajymdz0vs6nkk6ycmpp6dry9nsc586x0lcdhm4ws0h97fw764s2q7j4a69
+  - &raspberrypi-ssh age16cc86y33227f99nezsqtjkvltw8a57d2x090yy0zk8v6jq5sncnsj3kqev
 creation_rules:
-  - path_regex: secrets/[^/]+\.yaml$
+  - path_regex: secrets/mbp-asahi/[^/]+\.(yaml|json|env|ini)$
     key_groups:
     - age:
       - *key
       - *mbp-asahi-ssh
+  - path_regex: secrets/raspberrypi/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *key
+      - *raspberrypi-ssh

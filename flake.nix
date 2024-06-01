@@ -63,6 +63,7 @@
       system = "aarch64-linux";
       modules = [
         home-manager.nixosModules.home-manager
+        sops-nix.nixosModules.sops
         ./hosts/raspberrypi
         {
           nixpkgs.overlays = [nur.overlay];
