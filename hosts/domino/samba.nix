@@ -1,43 +1,34 @@
-{
+{pkgs, ...}: {
   services.samba-wsdd.enable = true;
   services.samba = {
     enable = true;
     securityType = "user";
     extraConfig = ''
       workgroup = WORKGROUP
-      server string = raspberrypi
-      netbios name = raspberrypi
+      server string = domino
+      netbios name = domino
       security = user
-      hosts allow = 192.168.100. 127.0.0.1 localhost
+      hosts allow = 192.168.100. 10.77.0. 127.0.0.1 localhost
       hosts deny = 0.0.0.0/0
       guest account = nobody
       map to guest = bad user
-
-      # Time machine config
-      min protocol = SMB2
-      server min protocol = SMB2
     '';
     shares = {
-      NASNTFS = {
-        path = "/mnt/nas-ntfs";
-        browseable = "yes";
-        "read only" = "no";
-        "guest ok" = "yes";
-        "create mask" = "0644";
-        "directory mask" = "0755";
-      };
       NAS = {
         path = "/mnt/nas";
         browseable = "yes";
+        writeable = "yes";
         "read only" = "no";
         "guest ok" = "yes";
         "create mask" = "0644";
         "directory mask" = "0755";
+        "valid users" = "share";
       };
-      "Time Machine" = {
+      "Time-Machine" = {
         path = "/mnt/nas/Time-Machine";
         public = "no";
         writeable = "yes";
+        "valid users" = "share";
         "fruit:aapl" = "yes";
         "fruit:time machine" = "yes";
         "fruit:model" = "TimeCapsule8,119";
@@ -53,10 +44,26 @@
     };
   };
   users = {
-    users.time-machine = {
-      isSystemUser = true;
-      group = "time-machine";
+    groups.share = {
+      gid = 993;
     };
-    groups.time-machine = {};
+    users.share = {
+      uid = 994;
+      isSystemUser = true;
+      group = "share";
+    };
+    users.pikpok.extraGroups = ["share"];
   };
+
+  sops.secrets."samba-password" = {
+    sopsFile = ../../secrets/domino/samba-password.yaml;
+  };
+
+  # Okay, this is ugly. But we somehow have to make sure we run this script
+  # after system.activationScripts.setupSecretsForUsers from sops-nix.
+  # Prepending a zzz_ to the script name ensures that it runs last.
+  system.activationScripts.zzz_samba_user_create = ''
+    smb_password=$(cat /run/secrets/samba-password)
+    echo -e "$smb_password\n$smb_password\n" | ${pkgs.samba}/bin/smbpasswd -a -s share
+  '';
 }

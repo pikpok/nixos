@@ -1,0 +1,31 @@
+{
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../../modules/base-linux.nix
+    ../../modules/user.nix
+    ../../modules/shell.nix
+    ../../modules/avahi.nix
+    ./mpd.nix
+    ./mosquitto.nix
+    ./containers.nix
+    ./samba.nix
+    ./photoprism.nix
+    ./traefik.nix
+    ./wireguard.nix
+    ./backup.nix
+    ./uptime-kuma.nix
+    ./intel-gpu.nix
+  ];
+
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
+
+  hardware.enableRedistributableFirmware = true;
+
+  system.stateVersion = "24.11";
+}

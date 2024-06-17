@@ -29,27 +29,12 @@
     sops-nix,
     ...
   } @ inputs: {
-    # nixosConfigurations.pikpok-pbp = nixpkgs.lib.nixosSystem {
-    #   system = "aarch64-linux";
-    #   modules = [
-    #     home-manager.nixosModules.home-manager
-    #     nixos-hardware.nixosModules.pine64-pinebook-pro
-    #     ./hosts/pbp
-    #     {
-    #       nixpkgs.overlays = [nur.overlay];
-    #       home-manager.useGlobalPkgs = true;
-    #       home-manager.useUserPackages = true;
-    #     }
-    #   ];
-    #   specialArgs = {inherit inputs;};
-    # };
-
-    nixosConfigurations.pikpok-mbp-asahi = nixpkgs.lib.nixosSystem {
-      system = "aarch64-linux";
+    nixosConfigurations.domino = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
       modules = [
         home-manager.nixosModules.home-manager
         sops-nix.nixosModules.sops
-        ./hosts/mbp-asahi
+        ./hosts/domino
         {
           nixpkgs.overlays = [nur.overlay];
           home-manager.useGlobalPkgs = true;
@@ -59,12 +44,12 @@
       specialArgs = {inherit inputs;};
     };
 
-    nixosConfigurations.raspberrypi = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.pikpok-mbp-asahi = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       modules = [
         home-manager.nixosModules.home-manager
         sops-nix.nixosModules.sops
-        ./hosts/raspberrypi
+        ./hosts/mbp-asahi
         {
           nixpkgs.overlays = [nur.overlay];
           home-manager.useGlobalPkgs = true;

@@ -1,6 +1,5 @@
 {
   pkgs,
-  lib,
   inputs,
   ...
 }: {
@@ -31,5 +30,6 @@
     htop
     jq
     httpie
+    sops
   ];
 }

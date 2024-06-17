@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   imports = [./base.nix];
 
   nix = {
@@ -18,6 +18,10 @@
       };
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    nixos-rebuild
+  ];
 
   fonts.fontDir.enable = true;
 
