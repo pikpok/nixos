@@ -16,6 +16,7 @@
     ./backup.nix
     ./uptime-kuma.nix
     ./intel-gpu.nix
+    ./grafana.nix
   ];
 
   # Use the systemd-boot EFI boot loader.

@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  teslamate-version = "1.29.1";
+  teslamate-version = "1.29.2";
   teslamate-abrp-version = "3.0.1";
   pihole-version = "2024.05.0";
   home-assistant-version = "2024.6.3";
@@ -19,6 +19,10 @@ in {
   sops.secrets."teslamate-abrp" = {
     sopsFile = ../../secrets/domino/teslamate-abrp.env;
     format = "dotenv";
+  };
+
+  virtualisation.podman = {
+    autoPrune.enable = true;
   };
 
   virtualisation.oci-containers = {
@@ -97,16 +101,5 @@ in {
       local all       all     trust
       host  all       all     10.88.0.1/16   trust
     '';
-  };
-
-  services.grafana = {
-    enable = true;
-    settings = {
-      server = {
-        http_addr = "127.0.0.1";
-        http_port = 3000;
-        root_url = "https://grafana.pikpok.xyz/";
-      };
-    };
   };
 }
