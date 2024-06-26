@@ -10,6 +10,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
     onActivation = {
       cleanup = "zap";
       autoUpdate = true;
+      upgrade = true;
     };
 
     global = {
