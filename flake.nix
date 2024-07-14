@@ -17,6 +17,9 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    actual-nix.url = "https://git.xeno.science/xenofem/actual-nix/archive/main.tar.gz";
+    actual-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -27,6 +30,7 @@
     darwin,
     nixos-hardware,
     sops-nix,
+    actual-nix,
     ...
   } @ inputs: {
     nixosConfigurations.domino = nixpkgs.lib.nixosSystem {
@@ -34,6 +38,7 @@
       modules = [
         home-manager.nixosModules.home-manager
         sops-nix.nixosModules.sops
+        actual-nix.nixosModules.default
         ./hosts/domino
         {
           nixpkgs.overlays = [nur.overlay];

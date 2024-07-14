@@ -72,6 +72,11 @@
             tls.certResolver = "cloudflare";
             service = "uptime-kuma";
           };
+          actual = {
+            rule = "Host(`actual.pikpok.xyz`)";
+            tls.certResolver = "cloudflare";
+            service = "actual";
+          };
         };
         services = {
           teslamate = {loadBalancer = {servers = [{url = "http://127.0.0.1:4000";}];};};
@@ -79,6 +84,7 @@
           pihole = {loadBalancer = {servers = [{url = "http://127.0.0.1:81";}];};};
           home-assistant = {loadBalancer = {servers = [{url = "http://127.0.0.1:8123";}];};};
           grafana = {loadBalancer = {servers = [{url = "http://127.0.0.1:3000";}];};};
+          actual = {loadBalancer = {servers = [{url = "http://127.0.0.1:5006";}];};};
           uptime-kuma = {loadBalancer = {servers = [{url = "http://${config.services.uptime-kuma.settings.HOST}:${config.services.uptime-kuma.settings.PORT}";}];};};
         };
       };

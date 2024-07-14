@@ -1,16 +1,16 @@
 {pkgs, ...}: let
   teslamateDashboards = pkgs.fetchgit {
     url = "https://github.com/teslamate-org/teslamate";
-    rev = "v1.29.2";
+    rev = "v1.30.1";
     sparseCheckout = ["grafana/dashboards"];
     sha256 = "sha256-1oiTnyzOK+gy2EGH3LpTAaDzc+aZSRlcfaMQ5k8RBcQ=";
   };
 
   teslamateCustomDashboards = pkgs.fetchgit {
     url = "https://github.com/jheredianet/Teslamate-CustomGrafanaDashboards";
-    rev = "dbbceb0";
+    rev = "v2024.6.27";
     sparseCheckout = ["dashboards"];
-    sha256 = "sha256-Z1hMpbMowTSDN9Uk278vC4S9mkCLbQnf/Q5V9ZJvYwI=";
+    sha256 = "sha256-J/MXCjZ/lg82+KUh6cCRjZMaIyP9EhGtSVcUMVwytZw=";
   };
 in {
   services.grafana = {
