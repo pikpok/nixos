@@ -1,10 +1,4 @@
-{
-  pkgs,
-  lib,
-  home-manager,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ../../modules/base-darwin.nix
     ../../modules/firefox.nix

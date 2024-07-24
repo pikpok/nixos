@@ -26,4 +26,13 @@
   users.users.pikpok.home = "/Users/pikpok";
 
   system.defaults.NSGlobalDomain.AppleFontSmoothing = 0;
+
+  system.defaults.dock.show-recents = false;
+  system.defaults.dock.persistent-apps = [
+    "/Applications/Firefox.app/"
+    "${pkgs.vscode}/Applications/Visual Studio Code.app/"
+    "/Applications/iTerm.app/"
+    "/Applications/KeePassXC.app/"
+    "/Applications/Beeper.app/"
+  ];
 }

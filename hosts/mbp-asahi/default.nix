@@ -34,7 +34,6 @@
   boot.plymouth.enable = true;
 
   hardware.asahi.useExperimentalGPUDriver = true;
-  sound.enable = true;
 
   networking.hostName = "pikpok-mbp-asahi";
   networking.networkmanager.enable = true;

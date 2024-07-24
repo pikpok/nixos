@@ -37,7 +37,6 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "keepassxc"
       "firefox"
       "nextcloud"
-      "spotify"
       "steam"
       "ngrok"
       "calibre"
@@ -51,18 +50,14 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "raycast"
       "iterm2"
       "orbstack"
-      "notion"
-      "screen-studio"
       "openmtp"
       "aldente"
       "tidal"
-      "cursor"
     ];
 
     masApps = {
       Xcode = 497799835;
       Wireguard = 1451685025;
-      Capcut = 1500855883;
       Cog = 1630499622;
     };
   };
