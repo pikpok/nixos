@@ -15,12 +15,7 @@
     echo exec sed -E $expressions "''${XDG_CONFIG_HOME:-$HOME/.config}"/gtk-3.0/settings.ini &>>/tmp/gsettings.log
     eval exec sed -E $expressions "''${XDG_CONFIG_HOME:-$HOME/.config}"/gtk-3.0/settings.ini &>>/tmp/gsettings.log
   '';
-  gsettingsCommand = ''
-    ${gsettingsScript} \
-      gtk-theme:gtk-theme-name \
-      icon-theme:gtk-icon-theme-name \
-      cursor-theme:gtk-cursor-theme-name
-  '';
+  gsettingsCommand = "${gsettingsScript} gtk-theme:gtk-theme-name icon-theme:gtk-icon-theme-name cursor-theme:gtk-cursor-theme-name";
 
   configure-gtk = pkgs.writeTextFile {
     name = "configure-gtk";
@@ -151,8 +146,8 @@ in {
           "sleep 5 && nextcloud"
           "${pkgs.valent}/bin/valent"
         ];
-        exec = "${gsettingsCommand}";
-
+        exec = gsettingsCommand;
+        monitor = ",preferred,auto,2";
         bind = [
           "$mod, 1, workspace, 1"
           "$mod, 2, workspace, 2"
@@ -189,13 +184,15 @@ in {
           ",XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl set +5%"
 
           "$mod, left, movefocus, l"
+          "$mod, left, changegroupactive, b"
           "$mod, down, movefocus, d"
           "$mod, up, movefocus, u"
           "$mod, right, movefocus, r"
-          "$mod SHIFT, left, movewindow, l"
-          "$mod SHIFT, down, movewindow, d"
-          "$mod SHIFT, up, movewindow, u"
-          "$mod SHIFT, right, movewindow, r"
+          "$mod, right, changegroupactive, f"
+          "$mod SHIFT, left, movewindoworgroup, l"
+          "$mod SHIFT, down, movewindoworgroup, d"
+          "$mod SHIFT, up, movewindoworgroup, u"
+          "$mod SHIFT, right, movewindoworgroup, r"
 
           "$mod SHIFT, 1, movetoworkspacesilent, 1"
           "$mod SHIFT, 2, movetoworkspacesilent, 2"
@@ -211,7 +208,8 @@ in {
           "$mod CTRL_SHIFT, left, movecurrentworkspacetomonitor, l"
           "$mod CTRL_SHIFT, up, movecurrentworkspacetomonitor, u"
           "$mod CTRL_SHIFT, down, movecurrentworkspacetomonitor, d"
-          "$mod, t, togglegroup,"
+          "$mod, w, togglegroup,"
+          "$mod, e, togglesplit,"
           "$mod, f, fullscreen,"
           "$mod SHIFT, space, togglefloating,"
 
