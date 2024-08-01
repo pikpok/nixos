@@ -35,4 +35,12 @@
     "/Applications/KeePassXC.app/"
     "/Applications/Beeper.app/"
   ];
+
+  # Launch Firefox with MOZ_LEGACY_PROFILES to avoid overwriting profiles.ini by
+  # Firefox with install details
+  # https://github.com/nix-community/home-manager/issues/3323
+  launchd.agents.FirefoxEnv = {
+    serviceConfig.ProgramArguments = ["/bin/sh" "-c" "launchctl setenv MOZ_LEGACY_PROFILES 1"];
+    serviceConfig.RunAtLoad = true;
+  };
 }
