@@ -63,4 +63,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
   };
 
   home-manager.users.pikpok.programs.firefox.package = pkgs.runCommand "firefox-0.0.0" {} "mkdir $out";
+  home-manager.users.pikpok.programs.zsh.initExtra = ''
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  '';
 }
