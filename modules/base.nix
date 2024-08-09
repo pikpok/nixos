@@ -19,6 +19,10 @@
       experimental-features = nix-command flakes
     '';
     nixPath = ["nixpkgs=${inputs.nixpkgs.outPath}"];
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 30d";
+    };
   };
 
   environment.systemPackages = with pkgs; [
