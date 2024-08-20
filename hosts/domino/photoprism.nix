@@ -9,7 +9,7 @@
     package = pkgs.photoprism.overrideAttrs (oldAttrs: {
       pname = oldAttrs.pname + "-ffmpeg-full";
       postInstall = ''
-        substituteInPlace $out/bin/photoprism --replace-fail "${pkgs.ffmpeg}/bin/ffmpeg" "${pkgs.ffmpeg-full}/bin/ffmpeg"
+        substituteInPlace $out/bin/photoprism --replace-fail "${pkgs.ffmpeg_7}/bin/ffmpeg" "${pkgs.ffmpeg_7-full}/bin/ffmpeg"
       '';
     });
     storagePath = "/mnt/nas/photoprism-storage";
@@ -47,6 +47,7 @@
     DynamicUser = lib.mkForce false;
     User = lib.mkForce "photoprism";
     Group = lib.mkForce "photoprism";
+    PrivateDevices = lib.mkForce false;
   };
 
   services.mysql = {

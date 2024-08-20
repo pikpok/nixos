@@ -10,8 +10,6 @@
 
     nur.url = "github:nix-community/NUR";
 
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
     nixos-m1.url = "github:tpwrules/nixos-m1/main";
     nixos-m1.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -28,7 +26,6 @@
     home-manager,
     nur,
     darwin,
-    nixos-hardware,
     sops-nix,
     actual-nix,
     ...

@@ -15,6 +15,8 @@
 
   services.borgmatic = {
     enable = true;
+    # env variables are not present when doing config check at buildtime
+    enableConfigCheck = false;
     configurations = {
       nas = {
         keep_daily = 7;
