@@ -4,9 +4,9 @@
   ...
 }: let
   teslamate-version = "1.30.1";
-  teslamate-abrp-version = "3.0.2";
+  teslamate-abrp-version = "3.0.4";
   pihole-version = "2024.07.0";
-  home-assistant-version = "2024.7.2";
+  home-assistant-version = "2024.8.2";
 in {
   sops.secrets."pihole" = {
     sopsFile = ../../secrets/domino/pihole.env;
@@ -84,6 +84,7 @@ in {
   };
 
   services.postgresql = {
+    package = pkgs.postgresql_16;
     enable = true;
     enableTCPIP = true;
     settings = {
