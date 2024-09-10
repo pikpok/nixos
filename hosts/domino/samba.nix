@@ -2,18 +2,17 @@
   services.samba-wsdd.enable = true;
   services.samba = {
     enable = true;
-    securityType = "user";
-    extraConfig = ''
-      workgroup = WORKGROUP
-      server string = domino
-      netbios name = domino
-      security = user
-      hosts allow = 192.168.100. 10.77.0. 127.0.0.1 localhost
-      hosts deny = 0.0.0.0/0
-      guest account = nobody
-      map to guest = bad user
-    '';
-    shares = {
+    settings = {
+      global = {
+        security = "user";
+        workgroup = "WORKGROUP";
+        "server string" = "domino";
+        "netbios name" = "domino";
+        "hosts allow" = "192.168.100. 10.77.0. 127.0.0.1 localhost";
+        "hosts deny" = "0.0.0.0/0";
+        "guest account" = "nobody";
+        "map to guest" = "bad user";
+      };
       NAS = {
         path = "/mnt/nas";
         browseable = "yes";
