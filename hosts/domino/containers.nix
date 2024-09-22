@@ -6,7 +6,7 @@
   teslamate-version = "1.30.1";
   teslamate-abrp-version = "3.0.4";
   pihole-version = "2024.07.0";
-  home-assistant-version = "2024.8.3";
+  home-assistant-version = "2024.9.2";
 in {
   sops.secrets."pihole" = {
     sopsFile = ../../secrets/domino/pihole.env;
