@@ -53,6 +53,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "openmtp"
       "aldente"
       "tidal"
+      "cursor"
     ];
 
     masApps = {
