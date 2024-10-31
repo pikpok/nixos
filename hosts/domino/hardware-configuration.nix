@@ -31,7 +31,7 @@
     hostName = "domino";
     useDHCP = lib.mkDefault true;
 
-    interfaces.enp1s0 = {
+    interfaces.enp2s0 = {
       useDHCP = false;
       ipv4.addresses = [
         {
@@ -43,11 +43,12 @@
 
     defaultGateway = {
       address = "192.168.100.1";
-      interface = "enp1s0";
+      interface = "enp2s0";
     };
     nameservers = ["192.168.100.7" "1.1.1.1"];
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.bluetooth.enable = true;
 }

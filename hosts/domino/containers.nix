@@ -3,10 +3,10 @@
   config,
   ...
 }: let
-  teslamate-version = "1.30.1";
+  teslamate-version = "1.31.1";
   teslamate-abrp-version = "3.0.4";
   pihole-version = "2024.07.0";
-  home-assistant-version = "2024.10.1";
+  home-assistant-version = "2024.10.4";
 in {
   sops.secrets."pihole" = {
     sopsFile = ../../secrets/domino/pihole.env;
