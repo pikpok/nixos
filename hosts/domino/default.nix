@@ -11,6 +11,7 @@
     ./containers.nix
     ./samba.nix
     ./photoprism.nix
+    ./immich.nix
     ./traefik.nix
     ./wireguard.nix
     ./backup.nix

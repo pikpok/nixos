@@ -82,6 +82,11 @@
             tls.certResolver = "cloudflare";
             service = "n8n";
           };
+          immich = {
+            rule = "Host(`immich.pikpok.xyz`)";
+            tls.certResolver = "cloudflare";
+            service = "immich";
+          };
         };
         services = {
           teslamate = {loadBalancer = {servers = [{url = "http://127.0.0.1:4000";}];};};
@@ -91,6 +96,7 @@
           grafana = {loadBalancer = {servers = [{url = "http://127.0.0.1:3000";}];};};
           actual = {loadBalancer = {servers = [{url = "http://127.0.0.1:5006";}];};};
           n8n = {loadBalancer = {servers = [{url = "http://127.0.0.1:5678";}];};};
+          immich = {loadBalancer = {servers = [{url = "http://127.0.0.1:2283";}];};};
           uptime-kuma = {loadBalancer = {servers = [{url = "http://${config.services.uptime-kuma.settings.HOST}:${config.services.uptime-kuma.settings.PORT}";}];};};
         };
       };
