@@ -20,6 +20,8 @@
     ./grafana.nix
     ./actual.nix
     ./n8n.nix
+    ./matrix.nix
+    ./postgres.nix
   ];
 
   # Use the systemd-boot EFI boot loader.

@@ -1,12 +1,8 @@
-{
-  pkgs,
-  config,
-  ...
-}: let
+{config, ...}: let
   teslamate-version = "1.31.1";
   teslamate-abrp-version = "3.0.4";
   pihole-version = "2024.07.0";
-  home-assistant-version = "2024.10.4";
+  home-assistant-version = "2024.11.2";
 in {
   sops.secrets."pihole" = {
     sopsFile = ../../secrets/domino/pihole.env;
@@ -81,26 +77,5 @@ in {
         };
       };
     };
-  };
-
-  services.postgresql = {
-    package = pkgs.postgresql_16;
-    enable = true;
-    enableTCPIP = true;
-    settings = {
-      port = 5432;
-    };
-    ensureDatabases = ["teslamate"];
-    ensureUsers = [
-      {
-        name = "teslamate";
-        ensureDBOwnership = true;
-      }
-    ];
-    authentication = pkgs.lib.mkOverride 10 ''
-      #type database  DBuser  auth-method
-      local all       all     trust
-      host  all       all     10.88.0.1/16   trust
-    '';
   };
 }
