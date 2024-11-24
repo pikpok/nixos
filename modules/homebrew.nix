@@ -31,6 +31,10 @@ lib.mkIf pkgs.stdenv.isDarwin {
         name = "ollama";
         restart_service = "changed";
       }
+      {
+        name = "asimov";
+        restart_service = "changed";
+      }
     ];
 
     casks = [
