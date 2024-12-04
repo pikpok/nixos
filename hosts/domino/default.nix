@@ -19,7 +19,7 @@
     ./intel-gpu.nix
     ./grafana.nix
     ./actual.nix
-    ./n8n.nix
+    ./windmill.nix
     ./matrix.nix
     ./postgres.nix
   ];

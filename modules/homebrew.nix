@@ -58,6 +58,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "aldente"
       "tidal"
       "cursor"
+      "bettermouse"
     ];
 
     masApps = {
