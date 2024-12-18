@@ -1,20 +1,20 @@
 {
-  pkgs,
   config,
   lib,
   ...
 }: let
+  serverName = "matrix.pikpok.xyz";
   defaultBridgeSettings = bridgeName: {
     bridge = {
       permissions = {
         "*" = "relay";
-        "matrix.pikpok.xyz" = "user";
-        "@pikpok:matrix.pikpok.xyz" = "admin";
+        "${serverName}" = "user";
+        "@pikpok:${serverName}" = "admin";
       };
     };
     homeserver = {
       address = "http://localhost:6167";
-      domain = "matrix.pikpok.xyz";
+      domain = serverName;
     };
     database = {
       type = "postgres";
@@ -27,20 +27,19 @@
       pickle_key = "$\{MAUTRIX_${builtins.replaceStrings ["-"] ["_"] (lib.toUpper bridgeName)}_ENCRYPTION_PICKLE_KEY\}";
     };
     backfill.enabled = true;
-    double_puppet.secrets."matrix.pikpok.xyz" = "as_token:$\{DOUBLEPUPPET_AS_TOKEN\}";
+    double_puppet.secrets."${serverName}" = "as_token:$\{DOUBLEPUPPET_AS_TOKEN\}";
   };
 in {
-  services.matrix-conduit = {
+  services.conduwuit = {
     enable = true;
-    package = pkgs.conduwuit;
     settings = {
       global = {
-        address = "0.0.0.0";
-        server_name = "matrix.pikpok.xyz";
+        address = ["0.0.0.0"];
+        server_name = serverName;
         database_backend = "rocksdb";
         well_known = {
-          server = "${config.services.matrix-conduit.settings.global.server_name}:443";
-          client = "https://${config.services.matrix-conduit.settings.global.server_name}";
+          server = "${serverName}:443";
+          client = "https://${serverName}";
         };
       };
     };
