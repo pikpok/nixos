@@ -108,7 +108,7 @@
           immich.loadBalancer.servers = [{url = "http://127.0.0.1:2283";}];
           matrix.loadBalancer.servers = [{url = "http://127.0.0.1:6167";}];
           ntfy.loadBalancer.servers = [{url = "http://127.0.0.1:2586";}];
-          windmill.loadBalancer.servers = [{url = "http://127.0.0.1:${toString config.services.windmill.serverPort}";}];
+          windmill.loadBalancer.servers = [{url = "http://127.0.0.1:8000";}];
           uptime-kuma.loadBalancer.servers = [{url = "http://${config.services.uptime-kuma.settings.HOST}:${config.services.uptime-kuma.settings.PORT}";}];
         };
       };

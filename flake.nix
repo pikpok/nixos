@@ -2,22 +2,35 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    darwin.url = "github:lnl7/nix-darwin/master";
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
+    darwin = {
+      url = "github:lnl7/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    nur.url = "github:nix-community/NUR";
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    nixos-m1.url = "github:tpwrules/nixos-m1/main";
-    nixos-m1.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-m1 = {
+      url = "github:tpwrules/nixos-m1/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    sops-nix.url = "github:Mic92/sops-nix";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    actual-nix.url = "https://git.xeno.science/xenofem/actual-nix/archive/main.tar.gz";
-    actual-nix.inputs.nixpkgs.follows = "nixpkgs";
+    actual-nix = {
+      url = "https://git.xeno.science/xenofem/actual-nix/archive/main.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -29,50 +42,63 @@
     sops-nix,
     actual-nix,
     ...
-  } @ inputs: {
-    nixosConfigurations.domino = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        home-manager.nixosModules.home-manager
-        sops-nix.nixosModules.sops
-        actual-nix.nixosModules.default
-        ./hosts/domino
-        {
-          nixpkgs.overlays = [nur.overlay];
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-        }
-      ];
-      specialArgs = {inherit inputs;};
+  } @ inputs: let
+    systems = {
+      x86_64-linux = "x86_64-linux";
+      aarch64-linux = "aarch64-linux";
+      aarch64-darwin = "aarch64-darwin";
     };
 
-    nixosConfigurations.pikpok-mbp-asahi = nixpkgs.lib.nixosSystem {
-      system = "aarch64-linux";
-      modules = [
-        home-manager.nixosModules.home-manager
-        sops-nix.nixosModules.sops
-        ./hosts/mbp-asahi
-        {
-          nixpkgs.overlays = [nur.overlay];
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-        }
-      ];
-      specialArgs = {inherit inputs;};
+    mkSystem = {
+      system,
+      modules,
+    }:
+      (
+        if builtins.match ".*-darwin" system != null
+        then darwin.lib.darwinSystem
+        else nixpkgs.lib.nixosSystem
+      ) {
+        inherit system modules;
+        specialArgs = {inherit inputs;};
+      };
+
+    commonModules = [
+      {
+        nixpkgs.overlays = [nur.overlays.default];
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+      }
+    ];
+
+    mkCommonModules = extraModules: extraModules ++ commonModules;
+  in {
+    nixosConfigurations = {
+      domino = mkSystem {
+        system = systems.x86_64-linux;
+        modules = mkCommonModules [
+          home-manager.nixosModules.home-manager
+          sops-nix.nixosModules.sops
+          actual-nix.nixosModules.default
+          ./hosts/domino
+        ];
+      };
+
+      pikpok-mbp-asahi = mkSystem {
+        system = systems.aarch64-linux;
+        modules = mkCommonModules [
+          home-manager.nixosModules.home-manager
+          sops-nix.nixosModules.sops
+          ./hosts/mbp-asahi
+        ];
+      };
     };
 
-    darwinConfigurations."pikpok-mbp" = darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      modules = [
+    darwinConfigurations."pikpok-mbp" = mkSystem {
+      system = systems.aarch64-darwin;
+      modules = mkCommonModules [
         home-manager.darwinModules.home-manager
         ./hosts/mbp
-        {
-          nixpkgs.overlays = [nur.overlay];
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-        }
       ];
-      specialArgs = {inherit inputs;};
     };
   };
 }

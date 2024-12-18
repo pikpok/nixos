@@ -6,7 +6,7 @@
     settings = {
       port = 5432;
     };
-    ensureDatabases = ["teslamate" "mautrix-gmessages" "mautrix-signal" "mautrix-meta-messenger" "mautrix-whatsapp"];
+    ensureDatabases = ["teslamate" "mautrix-gmessages" "mautrix-signal" "mautrix-meta-messenger" "mautrix-whatsapp" "windmill"];
     ensureUsers = [
       {
         name = "teslamate";
@@ -26,6 +26,10 @@
       }
       {
         name = "mautrix-whatsapp";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "windmill";
         ensureDBOwnership = true;
       }
     ];

@@ -1,20 +1,34 @@
-{pkgs, ...}: let
-  environment = {
-    BUN_PATH = "${pkgs.bun}/bin/bun";
-    DENO_PATH = "${pkgs.deno}/bin/deno";
-    NPM_PATH = "${pkgs.nodejs}/bin/npm";
-    NODE_BIN_PATH = "${pkgs.nodejs}/bin/node";
-    UV_PATH = "${pkgs.uv}/bin/uv";
-    FLOCK_PATH = "${pkgs.flock}/bin/flock";
-    GO_PATH = "${pkgs.go}/bin/go";
-    PYTHON_PATH = "${pkgs.python3}/bin/python3";
-  };
-in {
-  services.windmill = {
-    enable = true;
-    baseUrl = "https://windmill.pikpok.xyz/";
-  };
+{
+  virtualisation.oci-containers = {
+    containers = {
+      windmill-server = {
+        image = "ghcr.io/windmill-labs/windmill:1.440.1";
+        environment = {
+          MODE = "server";
+          DATABASE_URL = "postgres://windmill@host.docker.internal/windmill?sslmode=disable";
+        };
+        ports = ["8000:8000"];
+      };
 
-  systemd.services.windmill-worker.environment = environment;
-  systemd.services.windmill-server.environment = environment;
+      windmill-worker = {
+        image = "ghcr.io/windmill-labs/windmill:main";
+        environment = {
+          MODE = "worker";
+          WORKER_GROUP = "default";
+          DATABASE_URL = "postgres://windmill@host.docker.internal/windmill?sslmode=disable";
+        };
+      };
+
+      windmill-worker-native = {
+        image = "ghcr.io/windmill-labs/windmill:main";
+        environment = {
+          MODE = "worker";
+          WORKER_GROUP = "native";
+          NUM_WORKERS = "8";
+          SLEEP_QUEUE = "200";
+          DATABASE_URL = "postgres://windmill@host.docker.internal/windmill?sslmode=disable";
+        };
+      };
+    };
+  };
 }
