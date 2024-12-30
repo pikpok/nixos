@@ -1,3 +1,6 @@
 {
-  services.actual.enable = true;
+  services.actual = {
+    enable = true;
+    settings.port = 5006;
+  };
 }
