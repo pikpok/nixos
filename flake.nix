@@ -26,6 +26,11 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    teslamate = {
+      url = "github:teslamate-org/teslamate/v1.32.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -35,6 +40,7 @@
     nur,
     darwin,
     sops-nix,
+    teslamate,
     ...
   } @ inputs: let
     systems = {
@@ -72,6 +78,7 @@
         modules = mkCommonModules [
           home-manager.nixosModules.home-manager
           sops-nix.nixosModules.sops
+          teslamate.nixosModules.default
           ./hosts/domino
         ];
       };

@@ -1,19 +1,9 @@
 {config, ...}: let
-  teslamate-version = "1.31.1";
-  teslamate-abrp-version = "3.0.4";
   pihole-version = "2024.07.0";
-  home-assistant-version = "2024.11.2";
+  home-assistant-version = "2025.1.0";
 in {
   sops.secrets."pihole" = {
     sopsFile = ../../secrets/domino/pihole.env;
-    format = "dotenv";
-  };
-  sops.secrets."teslamate" = {
-    sopsFile = ../../secrets/domino/teslamate.env;
-    format = "dotenv";
-  };
-  sops.secrets."teslamate-abrp" = {
-    sopsFile = ../../secrets/domino/teslamate-abrp.env;
     format = "dotenv";
   };
 
@@ -54,27 +44,6 @@ in {
           # "--cap-add=NET_ADMIN" # Needed for BT
           # "--cap-add=NET_RAW" # Needed for BT
         ];
-      };
-      teslamate = {
-        image = "teslamate/teslamate:${teslamate-version}";
-        ports = ["4000:4000"];
-        environmentFiles = ["/run/secrets/teslamate"];
-        environment = {
-          DATABASE_USER = "teslamate";
-          DATABASE_NAME = "teslamate";
-          DATABASE_HOST = "host.docker.internal";
-          DATABASE_PASS = "";
-          MQTT_HOST = "host.docker.internal";
-          TZ = config.time.timeZone;
-        };
-      };
-      teslamate-abrp = {
-        image = "fetzu/teslamate-abrp:${teslamate-abrp-version}";
-        environmentFiles = ["/run/secrets/teslamate-abrp"];
-        environment = {
-          MQTT_SERVER = "host.docker.internal";
-          CAR_NUMBER = "1";
-        };
       };
     };
   };

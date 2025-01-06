@@ -22,6 +22,7 @@
     ./windmill.nix
     ./matrix.nix
     ./postgres.nix
+    ./teslamate.nix
   ];
 
   # Use the systemd-boot EFI boot loader.

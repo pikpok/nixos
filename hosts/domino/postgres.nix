@@ -33,10 +33,13 @@
         ensureDBOwnership = true;
       }
     ];
+    # TODO: Remove 10.88.0.1/16 once we get rid of all Docker containers connecting to Postgres
+    # TODO: Remove 127.0.0.1/32 once https://github.com/teslamate-org/teslamate/pull/4456 is merged
     authentication = pkgs.lib.mkOverride 10 ''
       #type database  DBuser  auth-method
       local all       all     trust
       host  all       all     10.88.0.1/16   trust
+      host  all       all     127.0.0.1/32   trust
     '';
   };
 }

@@ -99,7 +99,7 @@
           };
         };
         services = {
-          teslamate.loadBalancer.servers = [{url = "http://127.0.0.1:4000";}];
+          teslamate.loadBalancer.servers = [{url = "http://127.0.0.1:${toString config.services.teslamate.port}";}];
           photoprism.loadBalancer.servers = [{url = "http://127.0.0.1:2342";}];
           pihole.loadBalancer.servers = [{url = "http://127.0.0.1:81";}];
           home-assistant.loadBalancer.servers = [{url = "http://127.0.0.1:8123";}];
