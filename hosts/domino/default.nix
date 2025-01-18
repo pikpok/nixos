@@ -15,7 +15,6 @@
     ./traefik.nix
     ./wireguard.nix
     ./backup.nix
-    ./uptime-kuma.nix
     ./intel-gpu.nix
     ./grafana.nix
     ./actual.nix
@@ -24,6 +23,7 @@
     ./postgres.nix
     ./teslamate.nix
     ./nextcloud.nix
+    ./monitoring.nix
   ];
 
   # Use the systemd-boot EFI boot loader.

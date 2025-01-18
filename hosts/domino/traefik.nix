@@ -72,11 +72,6 @@
             tls.certResolver = "cloudflare";
             service = "grafana";
           };
-          uptime-kuma = {
-            rule = "Host(`uptime.pikpok.xyz`)";
-            tls.certResolver = "cloudflare";
-            service = "uptime-kuma";
-          };
           actual = {
             rule = "Host(`actual.pikpok.xyz`)";
             tls.certResolver = "cloudflare";
@@ -107,6 +102,16 @@
             tls.certResolver = "cloudflare";
             service = "nextcloud";
           };
+          prometheus = {
+            rule = "Host(`prometheus.pikpok.xyz`)";
+            tls.certResolver = "cloudflare";
+            service = "prometheus";
+          };
+          alertmanager = {
+            rule = "Host(`alertmanager.pikpok.xyz`)";
+            tls.certResolver = "cloudflare";
+            service = "alertmanager";
+          };
         };
         services = {
           teslamate.loadBalancer.servers = [{url = "http://127.0.0.1:${toString config.services.teslamate.port}";}];
@@ -120,7 +125,8 @@
           ntfy.loadBalancer.servers = [{url = "http://127.0.0.1:2586";}];
           windmill.loadBalancer.servers = [{url = "http://127.0.0.1:8000";}];
           nextcloud.loadBalancer.servers = [{url = "http://127.0.0.1:8081";}];
-          uptime-kuma.loadBalancer.servers = [{url = "http://${config.services.uptime-kuma.settings.HOST}:${config.services.uptime-kuma.settings.PORT}";}];
+          prometheus.loadBalancer.servers = [{url = "http://127.0.0.1:${toString config.services.prometheus.port}";}];
+          alertmanager.loadBalancer.servers = [{url = "http://[::1]:${toString config.services.prometheus.alertmanager.port}";}];
         };
       };
     };

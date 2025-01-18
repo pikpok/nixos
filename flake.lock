@@ -1,5 +1,26 @@
 {
   "nodes": {
+    "alertmanager-ntfy": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1710783408,
+        "narHash": "sha256-whlFTgJUXX4GuWqB4pb1wgM2gEkDXUBX8tC+y2MvXow=",
+        "owner": "alexbakker",
+        "repo": "alertmanager-ntfy",
+        "rev": "d8c35966a00e9713c62ab66b37107912f6032f07",
+        "type": "github"
+      },
+      "original": {
+        "owner": "alexbakker",
+        "repo": "alertmanager-ntfy",
+        "type": "github"
+      }
+    },
     "cachix": {
       "inputs": {
         "devenv": [
@@ -179,6 +200,21 @@
       "original": {
         "owner": "hercules-ci",
         "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1667395993,
+        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
         "type": "github"
       }
     },
@@ -405,11 +441,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1737213112,
-        "narHash": "sha256-IaVOW4V0zxOMOO0uRTzk5iClSLk02WScWQcpQPhPK2U=",
+        "lastModified": 1737215167,
+        "narHash": "sha256-ygGOvYQQl5xWsl5QiZQ6kRZoctbXuyaBNtxr/bAq+jM=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "eca88b09cb36eab71e3cd8eed8615d5ee9e2d799",
+        "rev": "f8570bd2fb99a0cab2b3f7d7cd4da783e1e3b520",
         "type": "github"
       },
       "original": {
@@ -420,6 +456,7 @@
     },
     "root": {
       "inputs": {
+        "alertmanager-ntfy": "alertmanager-ntfy",
         "darwin": "darwin",
         "home-manager": "home-manager",
         "nixos-m1": "nixos-m1",
