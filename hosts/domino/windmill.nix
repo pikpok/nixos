@@ -2,7 +2,7 @@
   virtualisation.oci-containers = {
     containers = {
       windmill-server = {
-        image = "ghcr.io/windmill-labs/windmill:1.440.1";
+        image = "ghcr.io/windmill-labs/windmill:1.447.5";
         environment = {
           MODE = "server";
           DATABASE_URL = "postgres://windmill@host.docker.internal/windmill?sslmode=disable";
@@ -11,7 +11,7 @@
       };
 
       windmill-worker = {
-        image = "ghcr.io/windmill-labs/windmill:main";
+        image = "ghcr.io/windmill-labs/windmill:1.447.5";
         environment = {
           MODE = "worker";
           WORKER_GROUP = "default";
@@ -20,7 +20,7 @@
       };
 
       windmill-worker-native = {
-        image = "ghcr.io/windmill-labs/windmill:main";
+        image = "ghcr.io/windmill-labs/windmill:1.447.5";
         environment = {
           MODE = "worker";
           WORKER_GROUP = "native";

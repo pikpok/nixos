@@ -28,7 +28,12 @@
         };
       };
 
-      entryPoints.websecure.address = ":443";
+      entryPoints.websecure = {
+        address = ":443";
+        forwardedHeaders = {
+          trustedIPs = ["127.0.0.1/32" "::1/128" "192.168.100.0/24"];
+        };
+      };
 
       certificatesResolvers.cloudflare.acme = {
         email = "krzysztof@bezrak.pl";
@@ -97,6 +102,11 @@
             tls.certResolver = "cloudflare";
             service = "windmill";
           };
+          nextcloud = {
+            rule = "Host(`c.pikpok.xyz`)";
+            tls.certResolver = "cloudflare";
+            service = "nextcloud";
+          };
         };
         services = {
           teslamate.loadBalancer.servers = [{url = "http://127.0.0.1:${toString config.services.teslamate.port}";}];
@@ -109,6 +119,7 @@
           matrix.loadBalancer.servers = [{url = "http://127.0.0.1:6167";}];
           ntfy.loadBalancer.servers = [{url = "http://127.0.0.1:2586";}];
           windmill.loadBalancer.servers = [{url = "http://127.0.0.1:8000";}];
+          nextcloud.loadBalancer.servers = [{url = "http://127.0.0.1:8081";}];
           uptime-kuma.loadBalancer.servers = [{url = "http://${config.services.uptime-kuma.settings.HOST}:${config.services.uptime-kuma.settings.PORT}";}];
         };
       };

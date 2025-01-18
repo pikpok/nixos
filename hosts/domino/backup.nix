@@ -72,24 +72,4 @@
       };
     };
   };
-
-  # systemd.timers."vps-backup" = {
-  #   wantedBy = ["timers.target"];
-  #   timerConfig = {
-  #     OnCalendar = "*-*-* 13:21:00";
-  #     Unit = "vps-backup.service";
-  #   };
-  # };
-
-  # systemd.services."vps-backup" = {
-  #   path = [pkgs.openssh pkgs.rsync];
-  #   script = ''
-  #     set -eu
-  #     cd /mnt/nas-ntfs/Backups/vps/ && ./backup.sh
-  #   '';
-  #   serviceConfig = {
-  #     Type = "oneshot";
-  #     User = "pikpok";
-  #   };
-  # };
 }

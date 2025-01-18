@@ -9,7 +9,7 @@
         {
           publicKey = "zJc1neQD2vufvtJPkReaNXlElPQuuBjizW6wwu1pmnA=";
           allowedIPs = ["10.77.0.0/24"];
-          endpoint = "c.pikpok.xyz:51820";
+          endpoint = "wg.pikpok.xyz:51820";
           persistentKeepalive = 25;
         }
       ];

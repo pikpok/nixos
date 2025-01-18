@@ -23,6 +23,7 @@
     ./matrix.nix
     ./postgres.nix
     ./teslamate.nix
+    ./nextcloud.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
