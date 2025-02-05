@@ -57,11 +57,6 @@
             tls.certResolver = "cloudflare";
             service = "photoprism";
           };
-          pihole = {
-            rule = "Host(`pihole.pikpok.xyz`)";
-            tls.certResolver = "cloudflare";
-            service = "pihole";
-          };
           home-assistant = {
             rule = "Host(`ha.pikpok.xyz`)";
             tls.certResolver = "cloudflare";
@@ -116,7 +111,6 @@
         services = {
           teslamate.loadBalancer.servers = [{url = "http://127.0.0.1:${toString config.services.teslamate.port}";}];
           photoprism.loadBalancer.servers = [{url = "http://127.0.0.1:2342";}];
-          pihole.loadBalancer.servers = [{url = "http://127.0.0.1:81";}];
           home-assistant.loadBalancer.servers = [{url = "http://127.0.0.1:8123";}];
           grafana.loadBalancer.servers = [{url = "http://127.0.0.1:3000";}];
           actual.loadBalancer.servers = [{url = "http://127.0.0.1:5006";}];

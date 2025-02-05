@@ -45,7 +45,7 @@
       address = "192.168.100.1";
       interface = "enp2s0";
     };
-    nameservers = ["192.168.100.7" "1.1.1.1"];
+    nameservers = ["192.168.100.1"];
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

@@ -6,6 +6,7 @@
     linux-builder = {
       enable = true;
       ephemeral = true;
+      systems = ["x86_64-linux" "aarch64-linux"];
       maxJobs = 4;
       config = {
         virtualisation = {
@@ -33,7 +34,7 @@
   system.defaults.dock.persistent-apps = [
     "/Applications/Firefox.app/"
     "/Applications/Cursor.app/"
-    "/Applications/iTerm.app/"
+    "/Applications/Ghostty.app/"
     "/Applications/KeePassXC.app/"
     "/Applications/Beeper.app/"
     "${pkgs.cinny-desktop}/Applications/Cinny.app"
