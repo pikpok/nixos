@@ -2,7 +2,6 @@
   imports = [./base.nix];
 
   nix = {
-    useDaemon = true;
     linux-builder = {
       enable = true;
       ephemeral = true;

@@ -27,6 +27,8 @@ lib.mkIf pkgs.stdenv.isDarwin {
     ];
 
     brews = [
+      "openfortivpn"
+      "gnupg"
       {
         name = "ollama";
         restart_service = "changed";
