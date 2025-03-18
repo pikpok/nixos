@@ -62,6 +62,11 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "cursor"
       "bettermouse"
       "ghostty"
+      "portfolioperformance"
+      "cyberduck"
+      "chatgpt"
+      "claude"
+      "obsidian"
     ];
 
     masApps = {

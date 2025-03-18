@@ -11,7 +11,6 @@
   networking.hostName = "pikpok-mbp";
 
   environment.systemPackages = with pkgs; [
-    obsidian
     asdf-vm
   ];
 

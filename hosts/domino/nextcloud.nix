@@ -10,10 +10,10 @@
   };
 
   services.nextcloud = {
-    notify_push.enable = true;
     enable = true;
+    package = pkgs.nextcloud31;
+    notify_push.enable = true;
     maxUploadSize = "10G";
-    package = pkgs.nextcloud30;
     hostName = "c.pikpok.xyz";
     https = true;
     database = {
@@ -37,8 +37,8 @@
       inherit (config.services.nextcloud.package.packages.apps) notes contacts calendar tasks deck gpoddersync notify_push news;
 
       timemanager = pkgs.fetchNextcloudApp {
-        url = "https://github.com/te-online/timemanager/archive/refs/tags/v0.3.16.tar.gz";
-        sha256 = "sha256-pFlKO8jGI5wat9986u3FFwZeTKZAH71PpVMwblzf/sU=";
+        url = "https://github.com/te-online/timemanager/archive/refs/tags/v0.3.18.tar.gz";
+        sha256 = "sha256-BtYFO550qA4fnPwz9pQ7mpjoL9bLJsTo65xQziWBLAw=";
         license = "agpl3Only";
       };
     };
