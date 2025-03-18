@@ -107,6 +107,11 @@
             tls.certResolver = "cloudflare";
             service = "alertmanager";
           };
+          n8n = {
+            rule = "Host(`n8n.pikpok.xyz`)";
+            tls.certResolver = "cloudflare";
+            service = "n8n";
+          };
         };
         services = {
           teslamate.loadBalancer.servers = [{url = "http://127.0.0.1:${toString config.services.teslamate.port}";}];
@@ -121,6 +126,7 @@
           nextcloud.loadBalancer.servers = [{url = "http://127.0.0.1:8081";}];
           prometheus.loadBalancer.servers = [{url = "http://127.0.0.1:${toString config.services.prometheus.port}";}];
           alertmanager.loadBalancer.servers = [{url = "http://[::1]:${toString config.services.prometheus.alertmanager.port}";}];
+          n8n.loadBalancer.servers = [{url = "http://127.0.0.1:5678";}];
         };
       };
     };

@@ -24,6 +24,7 @@
     ./teslamate.nix
     ./nextcloud.nix
     ./monitoring.nix
+    ./n8n.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
