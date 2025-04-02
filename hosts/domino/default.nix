@@ -8,7 +8,7 @@
     ../../modules/avahi.nix
     ./mpd.nix
     ./mosquitto.nix
-    ./containers.nix
+    ./home-assistant.nix
     ./samba.nix
     ./photoprism.nix
     ./immich.nix

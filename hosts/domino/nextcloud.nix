@@ -19,7 +19,10 @@
     database = {
       createLocally = true;
     };
+    phpOptions."opcache.interned_strings_buffer" = "32";
     settings = {
+      default_phone_region = "PL";
+      maintenance_window_start = 1;
       trusted_proxies = [
         "127.0.0.1"
         "192.168.100.7"

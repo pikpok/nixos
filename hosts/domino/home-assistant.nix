@@ -1,5 +1,5 @@
 {config, ...}: let
-  home-assistant-version = "2025.2.4";
+  home-assistant-version = "2025.3.4";
 in {
   virtualisation.podman = {
     autoPrune.enable = true;
@@ -21,6 +21,22 @@ in {
           # "--cap-add=NET_ADMIN" # Needed for BT
           # "--cap-add=NET_RAW" # Needed for BT
         ];
+      };
+    };
+  };
+
+  services.zigbee2mqtt = {
+    enable = true;
+    settings = {
+      mqtt.server = "mqtt://localhost:1883";
+      homeassistant.enabled = true;
+      frontend = {
+        enabled = true;
+        port = 8321;
+      };
+      serial = {
+        adapter = "ember";
+        port = "/dev/serial/by-id/usb-Itead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_V2_e03b2b0cb849ef119403c98cff00cc63-if00-port0";
       };
     };
   };

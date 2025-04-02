@@ -24,11 +24,13 @@ lib.mkIf pkgs.stdenv.isDarwin {
 
     taps = [
       "homebrew/services"
+      "leoafarias/fvm"
     ];
 
     brews = [
       "openfortivpn"
       "gnupg"
+      "fvm"
       {
         name = "ollama";
         restart_service = "changed";

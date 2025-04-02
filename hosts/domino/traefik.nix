@@ -112,6 +112,11 @@
             tls.certResolver = "cloudflare";
             service = "n8n";
           };
+          zigbee2mqtt = {
+            rule = "Host(`zigbee2mqtt.pikpok.xyz`)";
+            tls.certResolver = "cloudflare";
+            service = "zigbee2mqtt";
+          };
         };
         services = {
           teslamate.loadBalancer.servers = [{url = "http://127.0.0.1:${toString config.services.teslamate.port}";}];
@@ -127,6 +132,7 @@
           prometheus.loadBalancer.servers = [{url = "http://127.0.0.1:${toString config.services.prometheus.port}";}];
           alertmanager.loadBalancer.servers = [{url = "http://[::1]:${toString config.services.prometheus.alertmanager.port}";}];
           n8n.loadBalancer.servers = [{url = "http://127.0.0.1:5678";}];
+          zigbee2mqtt.loadBalancer.servers = [{url = "http://127.0.0.1:8321";}];
         };
       };
     };
