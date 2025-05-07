@@ -45,11 +45,6 @@ in {
     };
   };
 
-  services.ntfy-sh = {
-    enable = true;
-    settings.base-url = "https://ntfy.pikpok.xyz";
-  };
-
   # TODO: add declarative config for mautrix-gmessages
   virtualisation.oci-containers.containers.mautrix-gmessages = {
     image = "dock.mau.dev/mautrix/gmessages:v0.5.2";

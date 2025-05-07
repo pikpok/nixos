@@ -19,12 +19,13 @@
     ./grafana.nix
     ./actual.nix
     ./windmill.nix
-    ./matrix.nix
+    # ./matrix.nix
     ./postgres.nix
     ./teslamate.nix
     ./nextcloud.nix
     ./monitoring.nix
     ./n8n.nix
+    ./ntfy.nix
   ];
 
   # Use the systemd-boot EFI boot loader.

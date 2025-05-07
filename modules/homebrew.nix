@@ -31,6 +31,8 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "openfortivpn"
       "gnupg"
       "fvm"
+      "cocoapods"
+      "ansible"
       {
         name = "ollama";
         restart_service = "changed";
@@ -60,7 +62,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "orbstack"
       "openmtp"
       "aldente"
-      "tidal"
+      "spotify"
       "cursor"
       "bettermouse"
       "ghostty"
@@ -69,6 +71,8 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "chatgpt"
       "claude"
       "obsidian"
+      "wireshark"
+      "tailscale"
     ];
 
     masApps = {
@@ -78,8 +82,8 @@ lib.mkIf pkgs.stdenv.isDarwin {
     };
   };
 
-  home-manager.users.pikpok.programs.firefox.package = pkgs.runCommand "firefox-0.0.0" {} "mkdir $out";
-  home-manager.users.pikpok.programs.zsh.initExtra = ''
+  home-manager.users.pikpok.programs.firefox.package = null;
+  home-manager.users.pikpok.programs.zsh.initContent = ''
     eval "$(/opt/homebrew/bin/brew shellenv)"
   '';
 }

@@ -20,7 +20,7 @@
         DEFAULT_USER = "$USER";
       };
 
-      initExtra = ''
+      initContent = ''
         . ${pkgs.asdf-vm}/etc/profile.d/asdf-prepare.sh
 
         flakify() {
