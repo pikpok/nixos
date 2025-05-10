@@ -1,5 +1,5 @@
 let
-  version = "1.83.2";
+  version = "1.91.3";
 in {
   virtualisation.oci-containers.containers.n8n = {
     image = "docker.n8n.io/n8nio/n8n:${version}";

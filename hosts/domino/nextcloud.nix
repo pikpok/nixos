@@ -37,7 +37,7 @@
       dbhost = "/run/postgresql";
     };
     extraApps = {
-      inherit (config.services.nextcloud.package.packages.apps) notes contacts calendar tasks deck gpoddersync notify_push news;
+      inherit (config.services.nextcloud.package.packages.apps) notes contacts calendar tasks deck gpoddersync notify_push news mail;
 
       timemanager = pkgs.fetchNextcloudApp {
         url = "https://github.com/te-online/timemanager/archive/refs/tags/v0.3.18.tar.gz";

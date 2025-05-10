@@ -82,6 +82,10 @@ lib.mkIf pkgs.stdenv.isDarwin {
     };
   };
 
+  launchd.user.envVariables = {
+    "OLLAMA_HOST" = "http://0.0.0.0:11434";
+  };
+
   home-manager.users.pikpok.programs.firefox.package = null;
   home-manager.users.pikpok.programs.zsh.initContent = ''
     eval "$(/opt/homebrew/bin/brew shellenv)"
