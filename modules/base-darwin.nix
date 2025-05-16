@@ -29,14 +29,12 @@
 
   system.defaults.dock.show-recents = false;
 
-  nixpkgs.config.permittedInsecurePackages = ["cinny-4.2.3" "cinny-unwrapped-4.2.3"];
   system.defaults.dock.persistent-apps = [
     "/Applications/Firefox.app/"
     "/Applications/Cursor.app/"
     "/Applications/Ghostty.app/"
     "/Applications/KeePassXC.app/"
-    "/Applications/Beeper.app/"
-    "${pkgs.cinny-desktop}/Applications/Cinny.app"
+    "/Applications/Beeper Desktop.app/"
   ];
 
   # Launch Firefox with MOZ_LEGACY_PROFILES to avoid overwriting profiles.ini by
