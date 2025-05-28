@@ -25,6 +25,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
     taps = [
       "homebrew/services"
       "leoafarias/fvm"
+      "mobile-dev-inc/tap"
     ];
 
     brews = [
@@ -41,6 +42,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
         name = "asimov";
         restart_service = "changed";
       }
+      "maestro"
     ];
 
     casks = [
@@ -73,6 +75,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "obsidian"
       "wireshark"
       "tailscale"
+      "slack"
     ];
 
     masApps = {

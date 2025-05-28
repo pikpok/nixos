@@ -23,6 +23,8 @@
     nixos-rebuild
   ];
 
+  system.primaryUser = "pikpok";
+
   users.users.pikpok.home = "/Users/pikpok";
 
   system.defaults.NSGlobalDomain.AppleFontSmoothing = 0;
