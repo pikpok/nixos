@@ -12,13 +12,11 @@
         ublock-origin
         keepassxc-browser
         vimium
-        multi-account-containers
         react-devtools
         violentmonkey
         sponsorblock
         dearrow
-        open-url-in-container
-        # TODO: sticky-window-containers, fx_cast
+        simplifygmail
       ];
     };
     policies = {

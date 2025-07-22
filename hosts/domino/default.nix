@@ -10,7 +10,7 @@
     ./mosquitto.nix
     ./home-assistant.nix
     ./samba.nix
-    ./photoprism.nix
+    # ./photoprism.nix
     ./immich.nix
     ./traefik.nix
     ./wireguard.nix

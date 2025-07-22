@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }: {
   sops.secrets."borgmatic" = {
@@ -50,14 +51,14 @@
             label = "hetzner";
           }
         ];
-        postgresql_databases = [
+        postgresql_databases = lib.mkIf config.services.postgresql.enable [
           {
             name = "all";
             username = "postgres";
             pg_dump_command = "${pkgs.postgresql_16}/bin/pg_dumpall";
           }
         ];
-        mariadb_databases = [
+        mariadb_databases = lib.mkIf config.services.mysql.enable [
           {
             name = "all";
             username = "root";

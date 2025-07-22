@@ -227,7 +227,7 @@ in {
     };
   };
 
-  services.alertmanager-ntfy = {
+  services.prometheus.alertmanager-ntfy = {
     enable = true;
     settings = {
       http = {

@@ -28,13 +28,8 @@
     };
 
     teslamate = {
-      url = "github:teslamate-org/teslamate/v2.0.0";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    alertmanager-ntfy = {
-      url = "github:alexbakker/alertmanager-ntfy";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:teslamate-org/teslamate/v2.1.0";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -46,7 +41,6 @@
     darwin,
     sops-nix,
     teslamate,
-    alertmanager-ntfy,
     ...
   } @ inputs: let
     systems = {
@@ -85,7 +79,6 @@
           home-manager.nixosModules.home-manager
           sops-nix.nixosModules.sops
           teslamate.nixosModules.default
-          alertmanager-ntfy.nixosModules.x86_64-linux.default
           ./hosts/domino
         ];
       };

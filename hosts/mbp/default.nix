@@ -14,5 +14,6 @@
     asdf-vm
   ];
 
+  ids.gids.nixbld = 350;
   system.stateVersion = 4; # Did you read the comment?
 }
