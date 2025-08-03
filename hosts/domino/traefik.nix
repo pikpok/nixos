@@ -52,11 +52,11 @@
             tls.certResolver = "cloudflare";
             service = "teslamate";
           };
-          photoprism = {
-            rule = "Host(`photoprism.pikpok.xyz`)";
-            tls.certResolver = "cloudflare";
-            service = "photoprism";
-          };
+          # photoprism = {
+          #   rule = "Host(`photoprism.pikpok.xyz`)";
+          #   tls.certResolver = "cloudflare";
+          #   service = "photoprism";
+          # };
           home-assistant = {
             rule = "Host(`ha.pikpok.xyz`)";
             tls.certResolver = "cloudflare";
@@ -120,7 +120,7 @@
         };
         services = {
           teslamate.loadBalancer.servers = [{url = "http://127.0.0.1:${toString config.services.teslamate.port}";}];
-          photoprism.loadBalancer.servers = [{url = "http://127.0.0.1:2342";}];
+          # photoprism.loadBalancer.servers = [{url = "http://127.0.0.1:2342";}];
           home-assistant.loadBalancer.servers = [{url = "http://127.0.0.1:8123";}];
           grafana.loadBalancer.servers = [{url = "http://127.0.0.1:3000";}];
           actual.loadBalancer.servers = [{url = "http://127.0.0.1:5006";}];
