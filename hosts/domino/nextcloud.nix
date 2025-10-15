@@ -37,11 +37,11 @@
       dbhost = "/run/postgresql";
     };
     extraApps = {
-      inherit (config.services.nextcloud.package.packages.apps) notes contacts calendar tasks deck gpoddersync notify_push news mail;
+      inherit (config.services.nextcloud.package.packages.apps) notes contacts calendar tasks deck gpoddersync news mail;
 
       timemanager = pkgs.fetchNextcloudApp {
-        url = "https://github.com/te-online/timemanager/archive/refs/tags/v0.3.18.tar.gz";
-        sha256 = "sha256-BtYFO550qA4fnPwz9pQ7mpjoL9bLJsTo65xQziWBLAw=";
+        url = "https://github.com/te-online/timemanager/archive/refs/tags/v0.3.19.tar.gz";
+        sha256 = "sha256-wTrFnJhCeZZfCNYRWKSqp1d7e1coypOr277E0mr+cdU=";
         license = "agpl3Only";
       };
     };

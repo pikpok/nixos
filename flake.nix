@@ -28,8 +28,18 @@
     };
 
     teslamate = {
-      url = "github:teslamate-org/teslamate/v2.1.0";
+      url = "github:teslamate-org/teslamate/v2.1.1";
       # inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    ssh-keys = {
+      url = "https://github.com/pikpok.keys";
+      flake = false;
     };
   };
 
@@ -41,6 +51,7 @@
     darwin,
     sops-nix,
     teslamate,
+    disko,
     ...
   } @ inputs: let
     systems = {
@@ -89,6 +100,15 @@
           home-manager.nixosModules.home-manager
           sops-nix.nixosModules.sops
           ./hosts/mbp-asahi
+        ];
+      };
+
+      torpeda = mkSystem {
+        system = systems.aarch64-linux;
+        modules = mkCommonModules [
+          home-manager.nixosModules.home-manager
+          disko.nixosModules.disko
+          ./hosts/torpeda
         ];
       };
     };

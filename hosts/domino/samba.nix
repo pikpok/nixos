@@ -39,7 +39,7 @@
         "fruit:wipe_intentionally_left_blank_rfork" = "yes";
         "fruit:delete_empty_adfiles" = "yes";
         "vfs objects" = "catia fruit streams_xattr";
-        "fruit:time machine max size" = "1T";
+        "fruit:time machine max size" = "1.5T";
       };
     };
   };

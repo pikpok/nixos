@@ -1,5 +1,5 @@
 {config, ...}: let
-  home-assistant-version = "2025.8.0";
+  home-assistant-version = "2025.10.2";
 in {
   virtualisation.podman = {
     autoPrune.enable = true;
@@ -18,8 +18,8 @@ in {
         image = "ghcr.io/home-assistant/home-assistant:${home-assistant-version}";
         extraOptions = [
           "--network=host"
-          # "--cap-add=NET_ADMIN" # Needed for BT
-          # "--cap-add=NET_RAW" # Needed for BT
+          "--cap-add=NET_ADMIN"
+          "--cap-add=NET_RAW"
         ];
       };
     };

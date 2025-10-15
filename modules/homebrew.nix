@@ -73,11 +73,12 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "chatgpt"
       "claude"
       "obsidian"
-      "wireshark"
       "tailscale-app"
       "slack"
       "macwhisper"
       "postman"
+      "todoist-app"
+      "tableplus"
     ];
 
     masApps = {
