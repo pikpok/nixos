@@ -5,7 +5,6 @@
     ../../modules/base-linux.nix
     ../../modules/user.nix
     ./wg.nix
-    ./proxy.nix
   ];
 
   boot.loader.grub = {

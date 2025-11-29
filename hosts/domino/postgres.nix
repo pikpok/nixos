@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   services.postgresql = {
-    package = pkgs.postgresql_16;
+    package = pkgs.postgresql_18;
     enable = true;
     enableTCPIP = true;
     settings = {

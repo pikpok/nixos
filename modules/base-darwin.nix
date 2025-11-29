@@ -37,6 +37,7 @@
     "/Applications/Ghostty.app/"
     "/Applications/KeePassXC.app/"
     "/Applications/Beeper Desktop.app/"
+    "/Applications/WhatsApp.app/"
   ];
 
   # Launch Firefox with MOZ_LEGACY_PROFILES to avoid overwriting profiles.ini by

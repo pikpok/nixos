@@ -26,6 +26,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "homebrew/services"
       "leoafarias/fvm"
       "mobile-dev-inc/tap"
+      "hashicorp/tap"
     ];
 
     brews = [
@@ -43,6 +44,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
         restart_service = "changed";
       }
       "maestro"
+      "hashicorp/tap/terraform"
     ];
 
     casks = [
@@ -79,6 +81,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "postman"
       "todoist-app"
       "tableplus"
+      "whatsapp"
     ];
 
     masApps = {

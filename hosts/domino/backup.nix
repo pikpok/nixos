@@ -55,7 +55,7 @@
           {
             name = "all";
             username = "postgres";
-            pg_dump_command = "${pkgs.postgresql_16}/bin/pg_dumpall";
+            pg_dump_command = "${config.services.postgresql.package}/bin/pg_dumpall";
           }
         ];
         mariadb_databases = lib.mkIf config.services.mysql.enable [
