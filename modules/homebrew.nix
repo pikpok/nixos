@@ -30,7 +30,6 @@ lib.mkIf pkgs.stdenv.isDarwin {
     ];
 
     brews = [
-      "openfortivpn"
       "gnupg"
       "fvm"
       "cocoapods"
@@ -52,7 +51,6 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "firefox"
       "nextcloud"
       "steam"
-      "ngrok"
       "calibre"
       "remarkable"
       "zoom"
@@ -62,16 +60,13 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "fx-cast-bridge"
       "utm"
       "raycast"
-      "iterm2"
       "orbstack"
-      "openmtp"
       "aldente"
       "spotify"
       "cursor"
       "bettermouse"
       "ghostty"
       "portfolioperformance"
-      "cyberduck"
       "chatgpt"
       "claude"
       "obsidian"
@@ -79,7 +74,6 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "slack"
       "macwhisper"
       "postman"
-      "todoist-app"
       "tableplus"
       "whatsapp"
     ];

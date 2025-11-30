@@ -3,7 +3,6 @@
     ../../modules/base-darwin.nix
     ../../modules/firefox.nix
     ../../modules/user.nix
-    ../../modules/vscode.nix
     ../../modules/homebrew.nix
     ../../modules/shell.nix
   ];

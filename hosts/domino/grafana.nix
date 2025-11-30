@@ -1,14 +1,18 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  inputs,
+  ...
+}: let
   teslamateDashboards = pkgs.fetchgit {
     url = "https://github.com/teslamate-org/teslamate";
-    rev = "v1.31.1";
+    rev = inputs.teslamate.shortRev;
     sparseCheckout = ["grafana/dashboards"];
-    sha256 = "sha256-Sc36RgSTYDdKrRFEmHDT+GxogOGd27KzxJJIR1lUSPA=";
+    sha256 = "sha256-3cO59q7bPUQr4joHP72bsMusT4ciwmvHFWFg1y++/io=";
   };
 
   teslamateCustomDashboards = pkgs.fetchgit {
     url = "https://github.com/jheredianet/Teslamate-CustomGrafanaDashboards";
-    rev = "v2024.7.11";
+    rev = "v2025.8.31";
     sparseCheckout = ["dashboards"];
     sha256 = "sha256-MnGeeV2jIu/f0h+9AYaC9w4FoDKS91be/idwA+N4YsU=";
   };
@@ -75,9 +79,12 @@ in {
               name = "TeslaMate";
               type = "postgres";
               url = "/var/run/postgresql";
-              database = "teslamate";
               user = "teslamate";
-              jsonData = {sslmode = "disable";};
+              jsonData = {
+                postgresVersion = 1500;
+                sslmode = "disable";
+                database = "teslamate";
+              };
             }
           ];
         };

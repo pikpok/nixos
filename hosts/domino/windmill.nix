@@ -13,6 +13,6 @@
 
     baseUrl = "https://windmill.pikpok.xyz";
 
-    logLevel = "debug";
+    logLevel = "warn";
   };
 }
