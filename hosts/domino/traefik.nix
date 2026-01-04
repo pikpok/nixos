@@ -87,11 +87,6 @@
             tls.certResolver = "cloudflare";
             service = "ntfy";
           };
-          windmill = {
-            rule = "Host(`windmill.pikpok.xyz`)";
-            tls.certResolver = "cloudflare";
-            service = "windmill";
-          };
           nextcloud = {
             rule = "Host(`c.pikpok.xyz`)";
             tls.certResolver = "cloudflare";
@@ -127,7 +122,6 @@
           immich.loadBalancer.servers = [{url = "http://127.0.0.1:2283";}];
           # matrix.loadBalancer.servers = [{url = "http://127.0.0.1:6167";}];
           ntfy.loadBalancer.servers = [{url = "http://127.0.0.1:2586";}];
-          windmill.loadBalancer.servers = [{url = "http://127.0.0.1:8000";}];
           nextcloud.loadBalancer.servers = [{url = "http://127.0.0.1:8081";}];
           prometheus.loadBalancer.servers = [{url = "http://127.0.0.1:${toString config.services.prometheus.port}";}];
           alertmanager.loadBalancer.servers = [{url = "http://[::1]:${toString config.services.prometheus.alertmanager.port}";}];

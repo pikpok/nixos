@@ -18,7 +18,6 @@
     ./intel-gpu.nix
     ./grafana.nix
     ./actual.nix
-    ./windmill.nix
     # ./matrix.nix
     ./postgres.nix
     ./teslamate.nix
