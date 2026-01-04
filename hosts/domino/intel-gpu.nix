@@ -12,7 +12,6 @@
       libva-vdpau-driver
       libvdpau-va-gl
       intel-compute-runtime
-      intel-ocl
       vpl-gpu-rt
     ];
   };

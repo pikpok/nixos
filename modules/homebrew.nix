@@ -44,6 +44,10 @@ lib.mkIf pkgs.stdenv.isDarwin {
       }
       "maestro"
       "hashicorp/tap/terraform"
+      "opencode"
+      "awscli"
+      "openjdk@17"
+      "gh"
     ];
 
     casks = [
@@ -76,6 +80,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "postman"
       "tableplus"
       "whatsapp"
+      "antigravity"
     ];
 
     masApps = {

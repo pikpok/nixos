@@ -1,17 +1,18 @@
 {
   services.mpd = {
     enable = true;
-    musicDirectory = "/mnt/nas/Music";
-    extraConfig = ''
-      audio_output {
-        type "pipewire"
-        name "PipeWire"
-      }
-    '';
+    settings = {
+      music_directory = "/mnt/nas/Music";
+      bind_to_address = "any";
+      audio_output = [
+        {
+          type = "pipewire";
+          name = "PipeWire";
+        }
+      ];
+    };
 
-    # Optional:
-    network.listenAddress = "any"; # if you want to allow non-localhost connections
-    startWhenNeeded = true; # systemd feature: only start MPD service upon connection to its socket
+    startWhenNeeded = true;
 
     user = "pikpok";
   };
