@@ -42,7 +42,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
         name = "asimov";
         restart_service = "changed";
       }
-      "maestro"
+      "mobile-dev-inc/tap/maestro"
       "hashicorp/tap/terraform"
       "opencode"
       "awscli"
@@ -81,6 +81,9 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "tableplus"
       "whatsapp"
       "antigravity"
+      "codex"
+      "claude-code"
+      "codex-app"
     ];
 
     masApps = {
