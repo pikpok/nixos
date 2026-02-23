@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  home-manager.users.pikpok.programs.firefox = {
+  programs.firefox = {
     enable = true;
     profiles.default = {
       id = 0;

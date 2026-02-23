@@ -10,12 +10,11 @@
     ../../modules/avahi.nix
     ../../modules/borg.nix
     ../../modules/docker.nix
-    ../../modules/firefox.nix
     ../../modules/user.nix
     ../../modules/vscode.nix
-    ../../modules/hyprland.nix
     ../../modules/shell.nix
     ../../modules/wireguard.nix
+    ./home.nix
   ];
 
   sops.defaultSopsFile = ../../secrets/mbp-asahi/secrets.yaml;
@@ -29,15 +28,24 @@
     };
   };
 
+  hardware.asahi.extractPeripheralFirmware = false;
+
   # TODO: Plymouth doesn't work?
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
 
-  hardware.asahi.useExperimentalGPUDriver = true;
-
   networking.hostName = "pikpok-mbp-asahi";
   networking.networkmanager.enable = true;
   networking.networkmanager.wifi.backend = "iwd";
+
+  services.getty.autologinUser = "pikpok";
+  services.gvfs.enable = true;
+
+  # Needed when HM user packages provide xdg-desktop-portal definitions.
+  environment.pathsToLink = [
+    "/share/applications"
+    "/share/xdg-desktop-portal"
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

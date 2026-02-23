@@ -2,6 +2,7 @@
   imports = [
     ./hardware-configuration.nix
     ./disk-config.nix
+    ./home.nix
     ../../modules/base-linux.nix
     ../../modules/user.nix
     ./wg.nix

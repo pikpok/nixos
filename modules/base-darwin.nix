@@ -1,22 +1,10 @@
 {pkgs, ...}: {
   imports = [./base.nix];
 
-  nix = {
-    linux-builder = {
-      enable = true;
-      ephemeral = true;
-      systems = ["x86_64-linux" "aarch64-linux"];
-      maxJobs = 4;
-      config = {
-        virtualisation = {
-          darwin-builder = {
-            diskSize = 40 * 1024;
-            memorySize = 8 * 1024;
-          };
-          cores = 6;
-        };
-      };
-    };
+  nix-rosetta-builder = {
+    cores = 6;
+    memory = "8GiB";
+    diskSize = "40GiB";
   };
 
   environment.systemPackages = with pkgs; [

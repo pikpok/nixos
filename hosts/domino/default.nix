@@ -2,6 +2,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./home.nix
     ../../modules/base-linux.nix
     ../../modules/user.nix
     ../../modules/shell.nix

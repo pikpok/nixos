@@ -1,10 +1,10 @@
 {pkgs, ...}: {
   imports = [
     ../../modules/base-darwin.nix
-    ../../modules/firefox.nix
     ../../modules/user.nix
     ../../modules/homebrew.nix
     ../../modules/shell.nix
+    ./home.nix
   ];
 
   networking.hostName = "pikpok-mbp";

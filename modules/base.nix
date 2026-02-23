@@ -8,8 +8,6 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  home-manager.users.pikpok.home.stateVersion = "22.11";
-
   nix = {
     settings = {
       trusted-users = ["pikpok"];
