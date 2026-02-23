@@ -25,6 +25,8 @@ in {
         http_port = 3000;
         root_url = "https://grafana.pikpok.xyz/";
       };
+      # TODO: replace with a proper secret
+      security.secret_key = "$__file{/var/lib/grafana/secret-key}";
     };
     provision = {
       dashboards = {
