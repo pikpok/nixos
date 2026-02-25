@@ -15,7 +15,6 @@ lib.mkIf pkgs.stdenv.isDarwin {
 
     global = {
       brewfile = true;
-      lockfiles = false;
     };
 
     extraConfig = ''

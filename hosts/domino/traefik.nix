@@ -125,7 +125,9 @@
           nextcloud.loadBalancer.servers = [{url = "http://127.0.0.1:8081";}];
           prometheus.loadBalancer.servers = [{url = "http://127.0.0.1:${toString config.services.prometheus.port}";}];
           alertmanager.loadBalancer.servers = [{url = "http://[::1]:${toString config.services.prometheus.alertmanager.port}";}];
-          n8n.loadBalancer.servers = [{url = "http://127.0.0.1:5678";}];
+          n8n.loadBalancer.servers = [
+            {url = "http://127.0.0.1:${toString config.services.n8n.environment.N8N_PORT}";}
+          ];
           zigbee2mqtt.loadBalancer.servers = [{url = "http://127.0.0.1:8321";}];
         };
       };
