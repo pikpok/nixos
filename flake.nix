@@ -33,7 +33,7 @@
     };
 
     teslamate = {
-      url = "github:teslamate-org/teslamate/v2.2.0";
+      url = "github:teslamate-org/teslamate/v3.0.0";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
 

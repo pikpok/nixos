@@ -7,7 +7,7 @@
     url = "https://github.com/teslamate-org/teslamate";
     rev = inputs.teslamate.shortRev;
     sparseCheckout = ["grafana/dashboards"];
-    sha256 = "sha256-3cO59q7bPUQr4joHP72bsMusT4ciwmvHFWFg1y++/io=";
+    sha256 = "sha256-+OMre7dWg22JyluXW9Y5Hc+NM7BIyrtmZEni9wfH+2U=";
   };
 
   teslamateCustomDashboards = pkgs.fetchgit {
