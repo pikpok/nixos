@@ -112,6 +112,11 @@
             tls.certResolver = "cloudflare";
             service = "zigbee2mqtt";
           };
+          scrutiny = {
+            rule = "Host(`scrutiny.pikpok.xyz`)";
+            tls.certResolver = "cloudflare";
+            service = "scrutiny";
+          };
         };
         services = {
           teslamate.loadBalancer.servers = [{url = "http://127.0.0.1:${toString config.services.teslamate.port}";}];
@@ -129,6 +134,7 @@
             {url = "http://127.0.0.1:${toString config.services.n8n.environment.N8N_PORT}";}
           ];
           zigbee2mqtt.loadBalancer.servers = [{url = "http://127.0.0.1:8321";}];
+          scrutiny.loadBalancer.servers = [{url = "http://127.0.0.1:${toString config.services.scrutiny.settings.web.listen.port}";}];
         };
       };
     };

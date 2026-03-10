@@ -26,6 +26,7 @@
     ./monitoring.nix
     ./n8n.nix
     ./ntfy.nix
+    ./scrutiny.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
