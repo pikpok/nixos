@@ -5,6 +5,8 @@
     cores = 6;
     memory = "8GiB";
     diskSize = "40GiB";
+    onDemand = true;
+    onDemandLingerMinutes = 15;
   };
 
   environment.systemPackages = with pkgs; [

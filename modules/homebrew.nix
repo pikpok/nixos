@@ -26,6 +26,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "leoafarias/fvm"
       "mobile-dev-inc/tap"
       "hashicorp/tap"
+      "oven-sh/bun"
     ];
 
     brews = [
@@ -47,6 +48,13 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "awscli"
       "openjdk@17"
       "gh"
+      "fastlane"
+      "go"
+      "oven-sh/bun/bun"
+      "poppler"
+      "ruby"
+      "tesseract"
+      "uv"
     ];
 
     casks = [
