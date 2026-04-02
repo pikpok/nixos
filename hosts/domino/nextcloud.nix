@@ -11,7 +11,7 @@
 
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud32;
+    package = pkgs.nextcloud33;
     notify_push.enable = true;
     maxUploadSize = "10G";
     hostName = "c.pikpok.xyz";
