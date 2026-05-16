@@ -27,6 +27,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "mobile-dev-inc/tap"
       "hashicorp/tap"
       "oven-sh/bun"
+      "anomalyco/tap"
     ];
 
     brews = [
@@ -44,7 +45,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
       }
       "mobile-dev-inc/tap/maestro"
       "hashicorp/tap/terraform"
-      "opencode"
+      "anomalyco/tap/opencode"
       "awscli"
       "openjdk@17"
       "gh"
@@ -55,6 +56,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "ruby"
       "tesseract"
       "uv"
+      "rustup"
     ];
 
     casks = [
@@ -87,10 +89,12 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "postman"
       "tableplus"
       "whatsapp"
+      "zed"
       "antigravity"
       "codex"
       "claude-code"
       "codex-app"
+      "home-assistant"
     ];
 
     masApps = {

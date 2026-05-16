@@ -23,10 +23,14 @@
 
   system.defaults.dock.persistent-apps = [
     "/Applications/Firefox.app/"
+    "/Applications/Google Chrome.app/"
     "/Applications/Cursor.app/"
+    "/Applications/Codex.app/"
     "/Applications/Ghostty.app/"
+    "/Applications/Zed.app/"
     "/Applications/KeePassXC.app/"
     "/Applications/Beeper Desktop.app/"
+    "/Applications/Slack.app/"
     "/Applications/WhatsApp.app/"
   ];
 
