@@ -9,6 +9,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
 
     onActivation = {
       cleanup = "zap";
+      extraFlags = [ "--force-cleanup" ];
       autoUpdate = true;
       upgrade = true;
     };
@@ -69,7 +70,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "zoom"
       "android-studio"
       "betterdisplay"
-      "beeper"
+      "signal"
       "fx-cast-bridge"
       "utm"
       "raycast"
@@ -92,7 +93,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "zed"
       "antigravity"
       "codex"
-      "claude-code"
+      "claude-code@latest"
       "codex-app"
       "home-assistant"
     ];
