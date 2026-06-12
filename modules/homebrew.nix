@@ -8,8 +8,14 @@ lib.mkIf pkgs.stdenv.isDarwin {
     enable = true;
 
     onActivation = {
-      cleanup = "zap";
-      extraFlags = [ "--force-cleanup" ];
+      # Homebrew 6 renamed `brew bundle --cleanup` to `--force-cleanup`, but
+      # nix-darwin still emits the old flag for cleanup = "zap"/"uninstall",
+      # so pass the new flags manually until nix-darwin#1789 lands.
+      cleanup = "none";
+      extraFlags = [
+        "--zap"
+        "--force-cleanup"
+      ];
       autoUpdate = true;
       upgrade = true;
     };
@@ -18,17 +24,21 @@ lib.mkIf pkgs.stdenv.isDarwin {
       brewfile = true;
     };
 
+    # Homebrew 6 requires non-official taps to be explicitly trusted.
+    # nix-darwin's `taps` option can't express `trusted: true` yet
+    # (nix-darwin#1789), so declare those taps as raw Brewfile lines here;
+    # `brew bundle` applies trust before installing, regardless of file order.
     extraConfig = ''
       cask "firefox", args: { language: "pl-PL" }
+      tap "leoafarias/fvm", trusted: true
+      tap "mobile-dev-inc/tap", trusted: true
+      tap "hashicorp/tap", trusted: true
+      tap "oven-sh/bun", trusted: true
+      tap "anomalyco/tap", trusted: true
     '';
 
     taps = [
       "homebrew/services"
-      "leoafarias/fvm"
-      "mobile-dev-inc/tap"
-      "hashicorp/tap"
-      "oven-sh/bun"
-      "anomalyco/tap"
     ];
 
     brews = [

@@ -3,6 +3,7 @@
 in {
   virtualisation.podman = {
     autoPrune.enable = true;
+    autoPrune.flags = ["--all"];
   };
 
   virtualisation.oci-containers = {
