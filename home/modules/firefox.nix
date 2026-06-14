@@ -11,6 +11,7 @@
       extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
         ublock-origin
         keepassxc-browser
+        libredirect
         vimium
         react-devtools
         violentmonkey

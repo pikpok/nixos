@@ -33,7 +33,9 @@
     };
 
     teslamate = {
-      url = "github:teslamate-org/teslamate/v3.1.0";
+      # v4.0.1 plus the upstream Nix mixFodDeps hash fix after the tag.
+      # https://github.com/teslamate-org/teslamate/commit/954e8739326e092f7cddf7308dd4b704cc008f62
+      url = "github:teslamate-org/teslamate?rev=954e8739326e092f7cddf7308dd4b704cc008f62";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
 

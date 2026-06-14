@@ -24,6 +24,11 @@
             PublicKey = "Tzfxw9VGO8BKXcYyg+rFl/SlUQ51lngIP3J272BxXnw=";
             AllowedIPs = ["10.77.0.10"];
           }
+          # ipad
+          {
+            PublicKey = "bXnyrsUZjseMJOG8D9i3E9YkRqt1CUoJAXXajOa6z0A=";
+            AllowedIPs = ["10.77.0.12"];
+          }
           {
             PublicKey = "J5e2iweoUsEaqblFyjmliXBFJLsmGYwFFyhBtAIPjyc=";
             AllowedIPs = ["10.77.0.8"];
