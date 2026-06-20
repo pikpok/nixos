@@ -25,7 +25,7 @@ in {
   };
 
   home.packages = with pkgs; [
-    alacritty
+    ghostty
     nextcloud-client
     keepassxc
     xdg-utils
@@ -121,7 +121,7 @@ in {
         "${pkgs.valent}/bin/valent"
       ];
       exec = gsettingsCommand;
-      monitor = ",preferred,auto,2";
+      monitor = ",preferred,auto,auto";
       bind = [
         "$mod, 1, workspace, 1"
         "$mod, 2, workspace, 2"
@@ -135,7 +135,7 @@ in {
         "$mod, 9, workspace, 9"
         "$mod, d, exec, ${pkgs.wofi}/bin/wofi --show run"
 
-        "$mod, RETURN, exec, alacritty"
+        "$mod, RETURN, exec, ghostty"
         "$mod, n, exec, ${pkgs.networkmanager_dmenu}/bin/networkmanager_dmenu"
         "$mod SHIFT, b, exec, ${../../scripts/btmenu.sh}"
         "$mod SHIFT, e, exit"
@@ -183,7 +183,7 @@ in {
         "$mod CTRL_SHIFT, up, movecurrentworkspacetomonitor, u"
         "$mod CTRL_SHIFT, down, movecurrentworkspacetomonitor, d"
         "$mod, w, togglegroup,"
-        "$mod, e, togglesplit,"
+        "$mod, e, layoutmsg, togglesplit"
         "$mod, f, fullscreen,"
         "$mod SHIFT, space, togglefloating,"
 
@@ -196,9 +196,7 @@ in {
         "$mod, mouse:272, movewindow"
         "$mod, mouse:273, resizewindow"
       ];
-      gestures = {
-        workspace_swipe = true;
-      };
+      gesture = "3, horizontal, workspace";
       general = {
         gaps_out = 10;
         gaps_in = 10;
