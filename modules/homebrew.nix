@@ -68,6 +68,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "tesseract"
       "uv"
       "rustup"
+      "rtk"
     ];
 
     casks = [
