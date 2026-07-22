@@ -6,7 +6,7 @@
       ips = ["10.77.0.11/24"];
       privateKeyFile = "/run/secrets/wireguard/key";
       peers = [
-        {
+      {
           publicKey = "zJc1neQD2vufvtJPkReaNXlElPQuuBjizW6wwu1pmnA=";
           allowedIPs = ["10.77.0.0/24"];
           endpoint = "wg.pikpok.xyz:51820";

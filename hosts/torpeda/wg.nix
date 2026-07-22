@@ -31,7 +31,7 @@
           }
           {
             PublicKey = "J5e2iweoUsEaqblFyjmliXBFJLsmGYwFFyhBtAIPjyc=";
-            AllowedIPs = ["10.77.0.8"];
+            AllowedIPs = ["10.77.0.8" "192.168.100.0/24"];
           }
           # laptop
           {

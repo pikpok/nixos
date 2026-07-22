@@ -3,6 +3,12 @@
     sopsFile = ../../secrets/domino/wireguard.yaml;
   };
 
+  networking.nat = {
+    enable = true;
+    internalInterfaces = ["wg0"];
+    externalInterface = "enp2s0";
+  };
+
   networking.wireguard.interfaces.wg0 = {
     ips = ["10.77.0.17/24"];
     privateKeyFile = "/run/secrets/wireguard";
