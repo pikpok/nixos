@@ -35,6 +35,8 @@ lib.mkIf pkgs.stdenv.isDarwin {
       tap "hashicorp/tap", trusted: true
       tap "oven-sh/bun", trusted: true
       tap "anomalyco/tap", trusted: true
+      tap "supabase/tap", trusted: true
+      tap "stablyai/orca", trusted: true
     '';
 
     taps = [
@@ -69,6 +71,7 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "uv"
       "rustup"
       "rtk"
+      "supabase/tap/supabase"
     ];
 
     casks = [
@@ -86,13 +89,14 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "utm"
       "raycast"
       "orbstack"
+      "stablyai/orca/orca"
       "aldente"
       "spotify"
       "cursor"
       "bettermouse"
       "ghostty"
       "portfolioperformance"
-      "chatgpt"
+      "chatgpt" # Unified ChatGPT/Codex desktop app.
       "claude"
       "obsidian"
       "tailscale-app"
@@ -105,7 +109,6 @@ lib.mkIf pkgs.stdenv.isDarwin {
       "antigravity"
       "codex"
       "claude-code@latest"
-      "codex-app"
       "home-assistant"
     ];
 
