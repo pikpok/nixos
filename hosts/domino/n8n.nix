@@ -21,7 +21,7 @@
 
       N8N_PORT = 7788;
       N8N_EDITOR_BASE_URL = "https://n8n.pikpok.xyz";
-      WEBHOOK_URL = "https://n8n.pikpok.xyz/";
+      N8N_WEBHOOK_URL = "https://n8n.pikpok.xyz/";
 
       N8N_RUNNERS_AUTH_TOKEN_FILE = config.sops.secrets."n8n-runners-auth-token".path;
       N8N_ENCRYPTION_KEY_FILE = config.sops.secrets."encryption-key".path;

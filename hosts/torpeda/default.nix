@@ -11,6 +11,7 @@
   boot.loader.grub = {
     efiSupport = true;
     efiInstallAsRemovable = true;
+    configurationLimit = 5;
   };
 
   networking.hostName = "torpeda";

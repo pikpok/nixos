@@ -7,7 +7,7 @@
     url = "https://github.com/teslamate-org/teslamate";
     rev = inputs.teslamate.shortRev;
     sparseCheckout = ["grafana/dashboards"];
-    sha256 = "sha256-j91yu8jNEpFSFritUyl6m+g6S/3lhimlt5JzMJvYT58=";
+    sha256 = "sha256-usRFs+78iI7rNncxPDO9cT/aFnGmkBR79sgq4blBGlg=";
   };
 
   teslamateDefaultDashboards = pkgs.runCommand "teslamate-default-dashboards" {} ''
@@ -17,9 +17,9 @@
 
   teslamateCustomDashboards = pkgs.fetchgit {
     url = "https://github.com/jheredianet/Teslamate-CustomGrafanaDashboards";
-    rev = "v2026.4.2";
+    rev = "v2026.8.14";
     sparseCheckout = ["dashboards"];
-    sha256 = "sha256-2ObwieKKT2VRJtePmYqB2rkcBJcrCJ8PZ1iJ32eVjI8=";
+    sha256 = "sha256-QKLthv9vVviXi4ER04+M3m2umYSeT6o0ZjqsxaaTxVw=";
   };
 in {
   services.grafana = {

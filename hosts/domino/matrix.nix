@@ -47,7 +47,7 @@ in {
 
   # TODO: add declarative config for mautrix-gmessages
   virtualisation.oci-containers.containers.mautrix-gmessages = {
-    image = "dock.mau.dev/mautrix/gmessages:v0.5.2";
+    image = "dock.mau.dev/mautrix/gmessages:v0.2608.0";
     volumes = ["/var/lib/private/mautrix-gmessages:/data"];
     ports = ["29336:29336"];
   };

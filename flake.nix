@@ -33,9 +33,7 @@
     };
 
     teslamate = {
-      # v4.0.1 plus the upstream Nix mixFodDeps hash fix after the tag.
-      # https://github.com/teslamate-org/teslamate/commit/954e8739326e092f7cddf7308dd4b704cc008f62
-      url = "github:teslamate-org/teslamate?rev=954e8739326e092f7cddf7308dd4b704cc008f62";
+      url = "github:teslamate-org/teslamate/v4.1.1";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -193,7 +191,7 @@
       };
 
       torpeda = mkSystem {
-        system = systems.aarch64-linux;
+        system = systems.x86_64-linux;
         modules = mkCommonModules [
           home-manager.nixosModules.home-manager
           disko.nixosModules.disko
