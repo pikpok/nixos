@@ -8,6 +8,7 @@
     ../../modules/shell.nix
     ../../modules/avahi.nix
     ./mpd.nix
+    ./snapcast.nix
     ./mosquitto.nix
     ./home-assistant.nix
     ./samba.nix

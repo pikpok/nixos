@@ -3,6 +3,7 @@ keys:
   - &mbp-asahi-ssh age1ajymdz0vs6nkk6ycmpp6dry9nsc586x0lcdhm4ws0h97fw764s2q7j4a69
   - &raspberrypi-ssh age16cc86y33227f99nezsqtjkvltw8a57d2x090yy0zk8v6jq5sncnsj3kqev
   - &domino-ssh age1fzugye7wknqxu7q3awdnffdaz2yhzeeg2nryttqe7qydjj0z0yxsk4mp3k
+  - &torpeda-ssh age1exjzqk9aam28k9dycf4jvd0kaw9p5yjkvq6lr6ke00w8et32aayq43ez8e
 creation_rules:
   - path_regex: secrets/mbp-asahi/[^/]+\.?(yaml|json|env|ini)?$
     key_groups:
@@ -19,3 +20,8 @@ creation_rules:
     - age:
       - *key
       - *domino-ssh
+  - path_regex: secrets/torpeda/[^/]+\.?(yaml|json|env|ini)?$
+    key_groups:
+    - age:
+      - *key
+      - *torpeda-ssh

@@ -9,7 +9,7 @@
           "meta:///Spotify/Airplay?name=Meta&codec=flac"
         ];
       };
-      tcp.enabled = true;
+      "tcp-control".enabled = true;
       http.enabled = true;
     };
   };

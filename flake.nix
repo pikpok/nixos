@@ -33,7 +33,7 @@
     };
 
     teslamate = {
-      url = "github:teslamate-org/teslamate/v4.1.1";
+      url = "github:teslamate-org/teslamate/v4.2.0";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -194,6 +194,7 @@
         system = systems.x86_64-linux;
         modules = mkCommonModules [
           home-manager.nixosModules.home-manager
+          sops-nix.nixosModules.sops
           disko.nixosModules.disko
           ./hosts/torpeda
         ];

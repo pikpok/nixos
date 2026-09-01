@@ -1,4 +1,10 @@
-{
+{config, ...}: {
+  sops.secrets."wireguard" = {
+    sopsFile = ../../secrets/torpeda/wireguard.yaml;
+    owner = "systemd-network";
+    restartUnits = ["systemd-networkd.service"];
+  };
+
   networking.useNetworkd = true;
   systemd.network = {
     enable = true;
@@ -10,8 +16,7 @@
           MTUBytes = "1300";
         };
         wireguardConfig = {
-          # TODO: move to sops
-          PrivateKeyFile = "/wireguard-privkey";
+          PrivateKeyFile = config.sops.secrets."wireguard".path;
           ListenPort = 51820;
         };
         wireguardPeers = [
