@@ -53,4 +53,9 @@
       port = 8081;
     }
   ];
+
+  systemd.services.nextcloud-notify_push_setup = {
+    after = ["traefik.service"];
+    wants = ["traefik.service"];
+  };
 }
