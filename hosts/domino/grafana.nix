@@ -88,7 +88,7 @@ in {
               url = "/var/run/postgresql";
               user = "teslamate";
               jsonData = {
-                postgresVersion = 1500;
+                postgresVersion = 1800;
                 sslmode = "disable";
                 database = "teslamate";
               };

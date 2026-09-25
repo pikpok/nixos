@@ -1,5 +1,5 @@
 let
-  teslamate-abrp-version = "4.0.0";
+  teslamate-abrp-version = "4.0.1";
 in {
   sops.secrets."teslamate" = {
     sopsFile = ../../secrets/domino/teslamate.env;
@@ -11,7 +11,7 @@ in {
   };
 
   virtualisation.oci-containers.containers.teslamate-abrp = {
-    image = "fetzu/teslamate-abrp:${teslamate-abrp-version}";
+    image = "docker.io/fetzu/teslamate-abrp:${teslamate-abrp-version}";
     environmentFiles = ["/run/secrets/teslamate-abrp"];
     environment = {
       MQTT_SERVER = "host.docker.internal";

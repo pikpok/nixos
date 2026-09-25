@@ -40,8 +40,8 @@
       inherit (config.services.nextcloud.package.packages.apps) notes contacts calendar tasks deck gpoddersync news mail;
 
       timemanager = pkgs.fetchNextcloudApp {
-        url = "https://github.com/te-online/timemanager/archive/refs/tags/v0.3.25.tar.gz";
-        sha256 = "sha256-Y3xND+24J5Gi7NIovWb8C6g6k2IBUHuc9xdBwpV8EPM=";
+        url = "https://github.com/te-online/timemanager/archive/refs/tags/v0.3.26.tar.gz";
+        sha256 = "sha256-GM0e+bZkM9fhLIm7AFqucM7PPY3mqJ/+Z/JU1S7iOo4=";
         license = "agpl3Only";
       };
     };
