@@ -121,5 +121,8 @@ lib.mkIf pkgs.stdenv.isDarwin {
 
   launchd.user.envVariables = {
     "OLLAMA_HOST" = "http://0.0.0.0:11434";
+    # Keep the Apple-Silicon MLX path memory-efficient at agent-sized contexts.
+    "OLLAMA_FLASH_ATTENTION" = "1";
+    "OLLAMA_KV_CACHE_TYPE" = "q8_0";
   };
 }
