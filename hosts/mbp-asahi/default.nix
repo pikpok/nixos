@@ -28,7 +28,10 @@
     };
   };
 
-  hardware.asahi.extractPeripheralFirmware = false;
+  hardware.asahi = {
+    enable = true;
+    extractPeripheralFirmware = false;
+  };
 
   # TODO: Plymouth doesn't work?
   boot.initrd.systemd.enable = true;

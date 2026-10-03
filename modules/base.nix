@@ -12,11 +12,11 @@
     settings = {
       trusted-users = ["pikpok"];
       allowed-users = ["pikpok" "root"];
+      nix-path = ["nixpkgs=${inputs.nixpkgs.outPath}"];
     };
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    nixPath = ["nixpkgs=${inputs.nixpkgs.outPath}"];
     gc = {
       automatic = true;
       options = "--delete-older-than 30d";

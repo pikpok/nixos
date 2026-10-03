@@ -33,7 +33,7 @@
     };
 
     teslamate = {
-      url = "github:teslamate-org/teslamate/v4.2.0";
+      url = "github:teslamate-org/teslamate/v4.3.0";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -78,25 +78,11 @@
       then homeDirectories.darwin
       else homeDirectories.linux;
 
-    # nixpkgs currently points asdf-vm at the removed v0.20.1 tag.
-    asdfVmOverlay = final: prev: {
-      asdf-vm = prev.asdf-vm.overrideAttrs (_old: {
-        version = "0.20.2";
-        src = final.fetchFromGitHub {
-          owner = "asdf-vm";
-          repo = "asdf";
-          tag = "v0.20.2";
-          hash = "sha256-HJRNRA98MIOEF/Q3I+cGUL8kH904j3/msI+FGDbRH7A=";
-        };
-        vendorHash = "sha256-ompvvNzfJetcKCRueJxXALiN0rOQwSiytTHJcVXFEOo=";
-      });
-    };
-
     mkPkgs = system:
       import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        overlays = [nur.overlays.default asdfVmOverlay];
+        overlays = [nur.overlays.default];
       };
 
     homeManagerModules = {
@@ -144,7 +130,7 @@
 
     commonModules = [
       {
-        nixpkgs.overlays = [nur.overlays.default asdfVmOverlay];
+        nixpkgs.overlays = [nur.overlays.default];
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = {inherit inputs;};

@@ -11,6 +11,7 @@
 
   services.nextcloud = {
     enable = true;
+    # Nextcloud 35's app set does not yet include the enabled News app.
     package = pkgs.nextcloud34;
     notify_push.enable = true;
     maxUploadSize = "10G";

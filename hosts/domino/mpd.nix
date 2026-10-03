@@ -1,6 +1,7 @@
 {
   services.mpd = {
     enable = true;
+    openFirewall = true;
     settings = {
       music_directory = "/mnt/nas/Music";
       bind_to_address = "any";

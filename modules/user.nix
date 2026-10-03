@@ -3,7 +3,7 @@
   lib,
   ...
 }:
-lib.mkIf pkgs.stdenv.isLinux {
+lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
   users.users.pikpok = {
     isNormalUser = true;
     home = "/home/pikpok";

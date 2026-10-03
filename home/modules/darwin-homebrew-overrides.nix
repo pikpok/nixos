@@ -3,7 +3,7 @@
   pkgs,
   ...
 }:
-lib.mkIf pkgs.stdenv.isDarwin {
+lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
   programs.firefox.package = null;
   programs.zsh.profileExtra = ''
     source ~/.orbstack/shell/init.zsh 2>/dev/null || :

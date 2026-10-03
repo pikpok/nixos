@@ -3,12 +3,7 @@
   inputs,
   ...
 }: let
-  teslamateDashboards = pkgs.fetchgit {
-    url = "https://github.com/teslamate-org/teslamate";
-    rev = inputs.teslamate.shortRev;
-    sparseCheckout = ["grafana/dashboards"];
-    sha256 = "sha256-0g1Gcl1gEdLohItJbbQ7B0Of1R1AizEYcSQYnZXzOtA=";
-  };
+  teslamateDashboards = inputs.teslamate.outPath;
 
   teslamateDefaultDashboards = pkgs.runCommand "teslamate-default-dashboards" {} ''
     mkdir -p $out/grafana/dashboards

@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: {
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod"];
@@ -19,7 +20,13 @@
     options = ["fmask=0077" "dmask=0077"];
   };
 
-  boot.swraid.enable = true;
+  boot.swraid = {
+    enable = true;
+    # mdadm requires a notification handler; write array events to the journal.
+    mdadmConf = ''
+      PROGRAM ${pkgs.util-linux}/bin/logger
+    '';
+  };
   fileSystems."/mnt/nas" = {
     device = "/dev/disk/by-label/storage";
     fsType = "ext4";

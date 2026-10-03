@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  config,
+  pkgs,
+  ...
+}: let
   gsettings = "${pkgs.glib}/bin/gsettings";
   gsettingsScript = pkgs.writeShellScript "gsettings-auto.sh" ''
     expression=""
@@ -45,6 +49,7 @@ in {
 
   gtk = {
     enable = true;
+    gtk4.theme = config.gtk.theme;
     iconTheme = {
       name = "Adwaita";
       package = pkgs.adwaita-icon-theme;
@@ -109,6 +114,7 @@ in {
 
   wayland.windowManager.hyprland = {
     enable = true;
+    configType = "hyprlang";
     settings = {
       "$mod" = "SUPER";
       exec-once = [
