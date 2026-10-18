@@ -30,7 +30,7 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
     # `brew bundle` applies trust before installing, regardless of file order.
     extraConfig = ''
       cask "firefox", args: { language: "pl-PL" }
-      tap "leoafarias/fvm", trusted: true
+      tap "btwld/fvm", trusted: true
       tap "mobile-dev-inc/tap", trusted: true
       tap "hashicorp/tap", trusted: true
       tap "oven-sh/bun", trusted: true
@@ -45,7 +45,7 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
 
     brews = [
       "gnupg"
-      "fvm"
+      "btwld/fvm/fvm"
       "cocoapods"
       "ansible"
       {
@@ -58,7 +58,7 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
       }
       "mobile-dev-inc/tap/maestro"
       "hashicorp/tap/terraform"
-      "anomalyco/tap/opencode"
+      "anomalyco/tap/opencode-v2"
       "awscli"
       "openjdk@17"
       "gh"
