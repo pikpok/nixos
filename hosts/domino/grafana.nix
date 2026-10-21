@@ -12,9 +12,9 @@
 
   teslamateCustomDashboards = pkgs.fetchgit {
     url = "https://github.com/jheredianet/Teslamate-CustomGrafanaDashboards";
-    rev = "v2026.8.14";
+    rev = "v2026.10.15";
     sparseCheckout = ["dashboards"];
-    sha256 = "sha256-QKLthv9vVviXi4ER04+M3m2umYSeT6o0ZjqsxaaTxVw=";
+    sha256 = "sha256-aToN5yopGKW46JBa5MTQg5wvsISjEerYTYvTvGKVjdQ=";
   };
 in {
   services.grafana = {

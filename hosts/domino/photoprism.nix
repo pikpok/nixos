@@ -6,12 +6,7 @@
   services.photoprism = {
     enable = true;
     # Override photoprism, make sure it uses ffmpeg-full that includes Intel QSV support
-    package = pkgs.photoprism.overrideAttrs (oldAttrs: {
-      pname = oldAttrs.pname + "-ffmpeg-full";
-      postInstall = ''
-        substituteInPlace $out/bin/photoprism --replace-fail "${pkgs.ffmpeg_7}/bin/ffmpeg" "${pkgs.ffmpeg_7-full}/bin/ffmpeg"
-      '';
-    });
+    package = pkgs.photoprism.override {ffmpeg = pkgs.ffmpeg-full;};
     storagePath = "/mnt/nas/photoprism-storage";
     originalsPath = "/mnt/nas/Photos/photoprism";
     importPath = "/mnt/nas/Photos/photoprism-import";

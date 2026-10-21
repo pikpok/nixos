@@ -3,16 +3,9 @@
   config,
   ...
 }: {
-  sops.secrets."nextcloud-admin-password" = {
-    sopsFile = ../../secrets/${config.networking.hostName}/nextcloud.yaml;
-    owner = "nextcloud";
-    group = "nextcloud";
-  };
-
   services.nextcloud = {
     enable = true;
-    # Nextcloud 35's app set does not yet include the enabled News app.
-    package = pkgs.nextcloud34;
+    package = pkgs.nextcloud35;
     notify_push.enable = true;
     maxUploadSize = "10G";
     hostName = "c.pikpok.xyz";
@@ -31,7 +24,6 @@
       ];
     };
     config = {
-      adminpassFile = "/run/secrets/nextcloud-admin-password";
       dbtype = "pgsql";
       dbuser = "nextcloud";
       dbname = "nextcloud";
