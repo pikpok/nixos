@@ -117,6 +117,11 @@
             tls.certResolver = "cloudflare";
             service = "scrutiny";
           };
+          hermes = {
+            rule = "Host(`hermes.pikpok.xyz`)";
+            tls.certResolver = "cloudflare";
+            service = "hermes";
+          };
         };
         services = {
           teslamate.loadBalancer.servers = [{url = "http://127.0.0.1:${toString config.services.teslamate.port}";}];
@@ -135,6 +140,7 @@
           ];
           zigbee2mqtt.loadBalancer.servers = [{url = "http://127.0.0.1:8321";}];
           scrutiny.loadBalancer.servers = [{url = "http://127.0.0.1:${toString config.services.scrutiny.settings.web.listen.port}";}];
+          hermes.loadBalancer.servers = [{url = "http://127.0.0.1:9119";}];
         };
       };
     };

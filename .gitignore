@@ -1,3 +1,6 @@
 result
 .DS_Store
 .private/
+.env
+.env.*
+!.env.example

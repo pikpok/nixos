@@ -28,6 +28,7 @@
     ./n8n.nix
     ./ntfy.nix
     ./scrutiny.nix
+    ./hermes.nix
   ];
 
   # Use the systemd-boot EFI boot loader.

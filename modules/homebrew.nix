@@ -75,6 +75,8 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
     ];
 
     casks = [
+      "cuadriver"
+      "hermes-desktop"
       "keepassxc"
       "firefox"
       "nextcloud"
