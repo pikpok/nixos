@@ -1,5 +1,5 @@
 let
-  teslamate-abrp-version = "4.0.1";
+  teslamate-abrp-version = "4.0.2";
 in {
   sops.secrets."teslamate" = {
     sopsFile = ../../secrets/domino/teslamate.env;

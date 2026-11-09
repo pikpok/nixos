@@ -34,7 +34,6 @@
   };
 
   # TODO: Plymouth doesn't work?
-  boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
 
   networking.hostName = "pikpok-mbp-asahi";
