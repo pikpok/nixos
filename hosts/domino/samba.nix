@@ -39,7 +39,10 @@
         "fruit:wipe_intentionally_left_blank_rfork" = "yes";
         "fruit:delete_empty_adfiles" = "yes";
         "vfs objects" = "catia fruit streams_xattr";
-        "fruit:time machine max size" = "1.5T";
+        # Samba applies this cap to the whole share (every sparsebundle in it
+        # summed), not per Mac. Per-machine limits are set on each Mac with
+        # `tmutil setquota`.
+        "fruit:time machine max size" = "2.5T";
       };
     };
   };
