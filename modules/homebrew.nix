@@ -86,6 +86,8 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
 
     casks = [
       "cuadriver"
+      "session-manager-plugin" # AWS SSM Session Manager plugin for awscli.
+      "gcloud-cli"
       "hermes-desktop"
       "keepassxc"
       "firefox"
