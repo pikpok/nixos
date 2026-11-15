@@ -1,11 +1,13 @@
 {
   config,
+  lib,
   pkgs,
   ...
 }: let
-  # Hermes v0.22.5-desktop; bump the digest deliberately.
-  image = "docker.io/nousresearch/hermes-agent@sha256:b7837e696eebce08495f6984a79a0a6a7ef696af746d407debff26d88473a389";
+  # Hermes v0.23.1-desktop; bump the digest deliberately.
+  image = "docker.io/nousresearch/hermes-agent@sha256:385725287c207b1517717167d8ac8631e5e7cd2d47a9954df18b6e95b6e5e78b";
   dataDir = "/var/lib/hermes";
+  chrome = "${pkgs.google-chrome}/bin/google-chrome-stable";
   # `ssh mac` from the container: a shell on the owner's Mac.
   macSshConfig = pkgs.writeText "mac.conf" ''
     Host mac
@@ -28,10 +30,17 @@
   hermesConfig = (pkgs.formats.yaml {}).generate "hermes-config.yaml" {
     model = {
       provider = "openai-codex";
-      default = "gpt-6.1-sol";
+      default = "gpt-6-astra-900k";
+    };
+    # browser_exec and Bot Screen's Browser icon run regular Google Chrome
+    # (nixpkgs, mounted from /nix/store) in a visible window, on
+    # /opt/data/bot-desktop/browser-profile.
+    browser = {
+      executable_path = chrome;
+      headed = true;
+      allow_private_urls = true;
     };
     # Start Bot Screen (Xfce desktop over VNC) on the first headed browser use.
-    # The browser.* settings are only read from /opt/data/config.yaml; see README.
     bot_desktop.auto_start = true;
     # The Mac's desktop: Cua Driver's MCP server over SSH, which starts the
     # signed CuaDriver.app there.
@@ -57,6 +66,12 @@ in {
     home = dataDir;
   };
   systemd.tmpfiles.rules = ["d ${dataDir} 0700 hermes hermes -"];
+  # Each start is a new container (new hostname), and Hermes refuses a browser
+  # profile whose SingletonLock names another host. After the module's
+  # `podman rm -f hermes` no browser holds the profile, so the lock is stale.
+  systemd.services.podman-hermes.serviceConfig.ExecStartPre = lib.mkAfter [
+    "${pkgs.coreutils}/bin/rm -f ${dataDir}/bot-desktop/browser-profile/SingletonLock ${dataDir}/bot-desktop/browser-profile/SingletonCookie ${dataDir}/bot-desktop/browser-profile/SingletonSocket"
+  ];
 
   # Telegram bot token/allowlist and dashboard login.
   # The ChatGPT login lives in /var/lib/hermes/auth.json.
@@ -77,8 +92,6 @@ in {
       # Dashboard, for Traefik (hermes.pikpok.xyz).
       ports = ["127.0.0.1:9119:9119"];
       environment = {
-        # Regular Google Chrome, for the agent and Bot Screen alike.
-        AGENT_BROWSER_EXECUTABLE_PATH = "${pkgs.google-chrome}/bin/google-chrome-stable";
         HERMES_DASHBOARD = "1";
         TZ = "Europe/Warsaw";
       };

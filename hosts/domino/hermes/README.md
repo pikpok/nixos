@@ -15,10 +15,10 @@ the first browser use. To watch it or take over for logins, add
 `https://hermes.pikpok.xyz` as a remote gateway in Hermes Desktop, then
 **Bots → Hermes → Open Screen**.
 
-Hermes reads `browser.*` only from its writable profile, so these were set once
-with `hermes config set` (in `/var/lib/hermes/config.yaml`): `backend: "off"`
-(built-in browser tools instead of the browser-use CLI), `headed: true`,
-`allow_private_urls: true`. `cua-driver` and `agent-browser` were installed with
+The agent browses with `browser_exec` (Python over CDP; the old `browser_*`
+tools and `browser.backend` are gone since v0.23). Its `browser.*` settings
+(Chrome path, headed, private URLs) are managed in `../hermes.nix`; the agent
+and the dock's Browser icon share one profile. `cua-driver` was installed with
 `hermes pm install` into `/var/lib/hermes/tools`.
 
 ## Driving the Mac

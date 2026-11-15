@@ -106,7 +106,6 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
       "stablyai/orca/orca"
       "aldente"
       "spotify"
-      "cursor"
       "bettermouse"
       "ghostty"
       "portfolioperformance"

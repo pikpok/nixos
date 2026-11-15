@@ -25,7 +25,6 @@
   system.defaults.dock.persistent-apps = [
     "/Applications/Firefox.app/"
     "/Applications/Google Chrome.app/"
-    "/Applications/Cursor.app/"
     "/Applications/ChatGPT.app/"
     "/Applications/Ghostty.app/"
     "/Applications/Zed.app/"
