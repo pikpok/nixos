@@ -1,5 +1,5 @@
 {config, ...}: let
-  home-assistant-version = "2026.11.1";
+  home-assistant-version = "2026.11.2";
 in {
   virtualisation.podman = {
     autoPrune.enable = true;

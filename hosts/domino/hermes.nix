@@ -4,8 +4,8 @@
   pkgs,
   ...
 }: let
-  # Hermes v0.23.1-desktop; bump the digest deliberately.
-  image = "docker.io/nousresearch/hermes-agent@sha256:385725287c207b1517717167d8ac8631e5e7cd2d47a9954df18b6e95b6e5e78b";
+  # Hermes v0.23.3-desktop; bump the digest deliberately.
+  image = "docker.io/nousresearch/hermes-agent@sha256:5f587d1c036e551f57f1c706c460b41a4f48de0c4763e5865343eafd3950a2bc";
   dataDir = "/var/lib/hermes";
   chrome = "${pkgs.google-chrome}/bin/google-chrome-stable";
   # `ssh mac` from the container: a shell on the owner's Mac.

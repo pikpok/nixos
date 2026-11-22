@@ -85,6 +85,7 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
     ];
 
     casks = [
+      "element"
       "cuadriver"
       "session-manager-plugin" # AWS SSM Session Manager plugin for awscli.
       "gcloud-cli"
