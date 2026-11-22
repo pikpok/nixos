@@ -22,8 +22,10 @@
         keep_daily = 7;
         keep_monthly = 6;
         source_directories = [
-          "/mnt/nas/Music"
-          "/mnt/nas/Photos"
+          "/mnt/nas"
+        ];
+        exclude_patterns = [
+          "/mnt/nas/Time-Machine"
         ];
         repositories = [
           {
