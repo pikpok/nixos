@@ -30,7 +30,7 @@
   hermesConfig = (pkgs.formats.yaml {}).generate "hermes-config.yaml" {
     model = {
       provider = "openai-codex";
-      default = "gpt-6-astra-900k";
+      default = "gpt-6.2-astra";
     };
     # browser_exec and Bot Screen's Browser icon run regular Google Chrome
     # (nixpkgs, mounted from /nix/store) in a visible window, on
@@ -73,7 +73,7 @@ in {
     "${pkgs.coreutils}/bin/rm -f ${dataDir}/bot-desktop/browser-profile/SingletonLock ${dataDir}/bot-desktop/browser-profile/SingletonCookie ${dataDir}/bot-desktop/browser-profile/SingletonSocket"
   ];
 
-  # Telegram bot token/allowlist and dashboard login.
+  # Telegram bot token/allowlist, Matrix bot login (@hermes) and dashboard login.
   # The ChatGPT login lives in /var/lib/hermes/auth.json.
   sops.secrets.hermes = {
     sopsFile = ../../secrets/domino/hermes.env;
@@ -94,6 +94,12 @@ in {
       environment = {
         HERMES_DASHBOARD = "1";
         TZ = "Europe/Warsaw";
+        # @hermes on Domino's own homeserver (./matrix.nix); token and
+        # cross-signing recovery key in SOPS.
+        MATRIX_HOMESERVER = "https://matrix.pikpok.xyz";
+        MATRIX_USER_ID = "@hermes:matrix.pikpok.xyz";
+        MATRIX_ALLOWED_USERS = "@pikpok:matrix.pikpok.xyz";
+        MATRIX_E2EE_MODE = "optional";
       };
       volumes = [
         "${dataDir}:/opt/data"

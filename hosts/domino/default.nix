@@ -20,7 +20,7 @@
     ./intel-gpu.nix
     ./grafana.nix
     ./actual.nix
-    # ./matrix.nix
+    ./matrix.nix
     ./postgres.nix
     ./teslamate.nix
     ./nextcloud.nix

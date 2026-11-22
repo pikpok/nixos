@@ -1,8 +1,9 @@
 # Hermes on Domino
 
 [Hermes Agent](https://hermes-agent.nousresearch.com) in a Podman container,
-reached through [@mrxlovelybot](https://t.me/mrxlovelybot) (private chat, owner
-only). It uses the ChatGPT subscription via the `openai-codex` provider. All
+reached through a Matrix DM with `@hermes:matrix.pikpok.xyz` on Domino's own
+homeserver (`../matrix.nix`) and through [@mrxlovelybot](https://t.me/mrxlovelybot)
+(private chat). Both accept only the owner. It uses the ChatGPT subscription via the `openai-codex` provider. All
 state lives in `/var/lib/hermes` (backed up by Borgmatic); `SOUL.md` and the
 settings in `../hermes.nix` are mounted read-only.
 

@@ -77,11 +77,11 @@
             tls.certResolver = "cloudflare";
             service = "immich";
           };
-          # matrix = {
-          #   rule = "Host(`matrix.pikpok.xyz`)";
-          #   tls.certResolver = "cloudflare";
-          #   service = "matrix";
-          # };
+          matrix = {
+            rule = "Host(`matrix.pikpok.xyz`)";
+            tls.certResolver = "cloudflare";
+            service = "matrix";
+          };
           ntfy = {
             rule = "Host(`ntfy.pikpok.xyz`)";
             tls.certResolver = "cloudflare";
@@ -130,7 +130,7 @@
           grafana.loadBalancer.servers = [{url = "http://127.0.0.1:3000";}];
           actual.loadBalancer.servers = [{url = "http://127.0.0.1:5006";}];
           immich.loadBalancer.servers = [{url = "http://127.0.0.1:2283";}];
-          # matrix.loadBalancer.servers = [{url = "http://127.0.0.1:6167";}];
+          matrix.loadBalancer.servers = [{url = "http://127.0.0.1:6167";}];
           ntfy.loadBalancer.servers = [{url = "http://127.0.0.1:2586";}];
           nextcloud.loadBalancer.servers = [{url = "http://127.0.0.1:8081";}];
           prometheus.loadBalancer.servers = [{url = "http://127.0.0.1:${toString config.services.prometheus.port}";}];
